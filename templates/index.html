@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>wb19.95</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="navbar-content">
+      <h2 class="logo">WarenBergg</h2>
+      <ul>
+        <li><a href="/">1995</a></li>
+        <li><a href="/dither">Dither Tool</a></li>
+      </ul>
+      <button id="darkModeToggle" class="dark-btn">🌙</button>
+    </div>
+  </nav>
+
+  <div class="container">
+  <header class="topbar">
+    <span>wb</span>
+    <h1>1995.<br>WarenBergg</h1>
+    <span>1995</span>
+  </header>
+
+  <section class="desc" id="about">
+    <p class="left">About</p>
+    <p class="center">
+      Coding with purpose, designing with soul—inspired by faith, space, and endless possibilities.
+      Muslim creative coder exploring the universe through friends with AI, design, photography, and imagination.
+    </p>
+    <p class="right">Him</p>
+  </section>
+
+  <!-- TEKS BERJALAN -->
+  <div class="running-text">
+      <div class="marquee">
+      MAKE PEOPLE INTEREST WHAT I MADE, FRIENDS WITH AI • CREATIVE • CODING • PROCESSING • PYHTON • AND EVERTHING IN BETWEEN
+      </div>
+  </div>
+
+  <!-- VIDEO SLIDER GLASS EFFECT -->
+  <section class="scroll-gallery" id="work">
+    <div class="track">
+      {% for v in videos %}
+      <div class="card">
+        <video src="{{ v }}" autoplay muted loop playsinline></video>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  <!-- BIG LINK HEADING -->
+  <div class="big-link">
+    <div class="big-link-text">
+      <h2>MORE VISUAL MANIFESTO</h2>
+      <a href="https://scrapbox.io/WarenBergg1995/" target="_blank">↗</a>
+    </div>
+  
+    <img src="{{ url_for('static', filename='images/bergg.jpg') }}" alt="Manifesto Image">  
+</div>
+
+<!-- ====== FOOTER / FOOTBAR ====== -->
+<footer class="footbar">
+  <div class="footer-content">
+    <p class="title">1995.</p>
+    <p class="subtitle">Creative Tech • Visual AI • Digital Art</p>
+
+    <div class="social-links">
+      <a href="#" target="_blank">Instagram</a>
+      <a href="#" target="_blank">Github</a>
+      <a href="https://scrapbox.io/WarenBergg1995/" target="_blank">scrapbox.io</a>
+      <a href="https://x.com/warenbergg1995" target="_blank">X</a>
+    </div>
+
+    <p class="copyright">© 2025 wblatenight1995. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<!-- ================= JS FIXED DI BAWAH ================= -->
+<script>
+  window.addEventListener("scroll", () => {
+  document.querySelectorAll(".reveal").forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight - 50) el.classList.add("active");
+  });
+});
+
+  // Duplicate isi track agar bisa infinite scroll effect
+  const track = document.querySelector('.track');
+  track.innerHTML += track.innerHTML;
+  /* === DARK MODE === */
+  const toggle = document.getElementById("darkModeToggle");
+  
+  // load state dari localStorage
+  if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-mode");
+      toggle.textContent = "☀️";
+  }
+  
+  // toggle dark mode
+  toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+  
+      if (document.body.classList.contains("dark-mode")) {
+          localStorage.setItem("theme", "dark");
+          toggle.textContent = "☀️";
+      } else {
+          localStorage.setItem("theme", "light");
+          toggle.textContent = "🌙";
+      }
+  });
+  
+  /* === PARALLAX MOUSE UNTUK VIDEO SLIDER PERTAMA SAJA === */
+  const firstVideo = document.querySelector('.track video');
+  
+  document.addEventListener('mousemove', (e) => {
+      if (!firstVideo) return;
+      let x = (e.clientX / window.innerWidth - 0.5) * 10; /* 10 = lebih halus */
+      let y = (e.clientY / window.innerHeight - 0.5) * 10;
+      firstVideo.style.transform = `translate(${x}px, ${y}px)`;
+  });
+  </script>
+  
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

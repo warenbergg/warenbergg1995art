@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Atkinson Dither - kdblatenight</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #fff;
+      color: #000;
+      min-height: 100vh;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    body.dark-mode {
+      background: #0a0a0a;
+      color: #e9e9e9;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.8);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    body.dark-mode .navbar {
+      background: rgba(10, 10, 10, 0.8);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar .logo {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .navbar ul {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .navbar a {
+      text-decoration: none;
+      color: inherit;
+      font-size: 14px;
+      transition: opacity 0.3s ease;
+    }
+
+    .navbar a:hover {
+      opacity: 0.6;
+    }
+
+    .dark-btn {
+      background: transparent;
+      border: 2px solid currentColor;
+      border-radius: 50px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: 0.3s ease;
+    }
+
+    .dark-btn:hover {
+      opacity: 0.7;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 24px;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .header h1 {
+      font-size: 60px;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .header p {
+      font-size: 13px;
+      opacity: 0.7;
+      max-width: 500px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Main Tool */
+    .tool-container {
+      border: 2px solid currentColor;
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 6px 6px 0 currentColor;
+      background: rgba(0, 0, 0, 0.02);
+      margin-bottom: 32px;
+    }
+
+    body.dark-mode .tool-container {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    @media (max-width: 768px) {
+      .tool-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Canvas Area */
+    .canvas-container {
+      border: 2px solid currentColor;
+      border-radius: 8px;
+      padding: 16px;
+      aspect-ratio: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.03);
+      position: relative;
+      overflow: hidden;
+    }
+
+    body.dark-mode .canvas-container {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    #canvas {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: none;
+    }
+
+    #canvas.active {
+      display: block;
+    }
+
+    .upload-placeholder {
+      text-align: center;
+    }
+
+    .upload-placeholder.hidden {
+      display: none;
+    }
+
+    /* Controls */
+    .controls {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Style Selector */
+    .style-group {
+      margin-bottom: 24px;
+    }
+
+    .style-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .style-buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+
+    .style-btn {
+      padding: 10px 16px;
+      border: 2px solid currentColor;
+      border-radius: 6px;
+      background: transparent;
+      color: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .style-btn:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    body.dark-mode .style-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .style-btn.active {
+      background: currentColor;
+      color: #fff;
+    }
+
+    body.dark-mode .style-btn.active {
+      background: #fff;
+      color: #000;
+    }
+
+    .slider-group {
+      margin-bottom: 24px;
+    }
+
+    .slider-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .slider-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .slider-container input[type="range"] {
+      flex: 1;
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .slider-container input[type="range"]::-webkit-slider-track {
+      background: rgba(0, 0, 0, 0.2);
+      height: 8px;
+      border-radius: 4px;
+    }
+
+    body.dark-mode .slider-container input[type="range"]::-webkit-slider-track {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .slider-container input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: currentColor;
+      border: 2px solid currentColor;
+      margin-top: -8px;
+    }
+
+    .slider-container input[type="range"]::-moz-range-track {
+      background: rgba(0, 0, 0, 0.2);
+      height: 8px;
+      border-radius: 4px;
+    }
+
+    body.dark-mode .slider-container input[type="range"]::-moz-range-track {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .slider-container input[type="range"]::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: currentColor;
+      border: 2px solid currentColor;
+    }
+
+    .slider-value {
+      border: 2px solid currentColor;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      font-weight: 600;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .slider-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      opacity: 0.5;
+      margin-top: 8px;
+    }
+
+    /* Buttons */
+    .btn {
+      width: 100%;
+      padding: 12px 24px;
+      border: 2px solid currentColor;
+      border-radius: 6px;
+      background: transparent;
+      color: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .btn:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 currentColor;
+    }
+
+    .btn:active {
+      transform: translate(4px, 4px);
+      box-shadow: none;
+    }
+
+    .btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .btn:disabled:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Info Section */
+    .info {
+      text-align: center;
+      font-size: 13px;
+      opacity: 0.6;
+      line-height: 1.6;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .info strong {
+      font-weight: 600;
+      opacity: 1;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 120px;
+      padding: 40px 0;
+      text-align: center;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    body.dark-mode .footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer .title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .footer .subtitle {
+      font-size: 13px;
+      opacity: 0.7;
+      margin-bottom: 16px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .social-links a {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      color: inherit;
+      transition: 0.3s ease;
+    }
+
+    .social-links a:hover {
+      border-bottom: 1px solid currentColor;
+      opacity: 0.7;
+    }
+
+    .footer .copyright {
+      font-size: 12px;
+      opacity: 0.5;
+      margin-top: 10px;
+    }
+
+    #fileInput {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-content">
+      <h2 class="logo">WarenBergg</h2>
+      <ul>
+        <li><a href="/">1995</a></li>
+        <li><a href="/dither">Dither Tool</a></li>
+      </ul>
+      <button id="darkModeToggle" class="dark-btn">🌙</button>
+    </div>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-top">
+        <span>wb</span>
+        <h1>Atkinson<br>dither</h1>
+        <span>1995</span>
+      </div>
+      <p>
+        Classic dithering algorithms - transform your images into retro 1-bit art with multiple styles.
+      </p>
+    </header>
+
+    <!-- TOOL -->
+    <div class="tool-container">
+      <div class="tool-grid">
+        <!-- Canvas Area -->
+        <div class="canvas-container">
+          <div id="uploadPlaceholder" class="upload-placeholder">
+            <button class="btn" onclick="document.getElementById('fileInput').click()">
+              Choose Image...
+            </button>
+          </div>
+          <canvas id="canvas"></canvas>
+          <input type="file" id="fileInput" accept="image/*">
+        </div>
+
+        <!-- Controls -->
+        <div class="controls">
+          <!-- Style Selector -->
+          <div class="style-group">
+            <label>Dither Style</label>
+            <div class="style-buttons">
+              <button class="style-btn active" data-style="atkinson">Atkinson</button>
+              <button class="style-btn" data-style="floyd">Floyd-Steinberg</button>
+              <button class="style-btn" data-style="ordered">Ordered (Bayer)</button>
+              <button class="style-btn" data-style="random">Random</button>
+            </div>
+          </div>
+
+          <!-- Threshold Slider -->
+          <div class="slider-group">
+            <label>Threshold</label>
+            <div class="slider-container">
+              <input type="range" id="brightnessSlider" min="0" max="255" value="128">
+              <div class="slider-value" id="brightnessValue">128</div>
+            </div>
+            <div class="slider-labels">
+              <span>0</span>
+              <span>128</span>
+              <span>255</span>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button class="btn" onclick="document.getElementById('fileInput').click()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              Choose Image
+            </button>
+            <button class="btn" id="saveBtn" disabled>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INFO -->
+    <div class="info">
+      <p>
+        <strong>Atkinson:</strong> Classic Mac dithering (1984) • 
+        <strong>Floyd-Steinberg:</strong> More detailed error diffusion • 
+        <strong>Ordered:</strong> Bayer matrix pattern • 
+        <strong>Random:</strong> Chaotic stippling effect
+      </p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="title">1995.</p>
+    <p class="subtitle">Creative Tech • Visual AI • Digital Art</p>
+    <div class="social-links">
+      <a href="#" target="_blank">Instagram</a>
+      <a href="#" target="_blank">Github</a>
+      <a href="https://scrapbox.io/WarenBergg1995/" target="_blank">scrapbox.io</a>
+      <a href="https://x.com/warenbergg1995" target="_blank">X</a>
+    </div>
+    <p class="copyright">© 2025  wblatenight1995. All Rights Reserved.</p>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    // Dark Mode Toggle
+    const toggle = document.getElementById("darkModeToggle");
+    
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-mode");
+      toggle.textContent = "☀️";
+    }
+    
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+      
+      if (document.body.classList.contains("dark-mode")) {
+        localStorage.setItem("theme", "dark");
+        toggle.textContent = "☀️";
+      } else {
+        localStorage.setItem("theme", "light");
+        toggle.textContent = "🌙";
+      }
+    });
+
+    // Dithering Algorithms
+    let originalImage = null;
+    let currentStyle = 'atkinson';
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const fileInput = document.getElementById('fileInput');
+    const brightnessSlider = document.getElementById('brightnessSlider');
+    const brightnessValue = document.getElementById('brightnessValue');
+    const saveBtn = document.getElementById('saveBtn');
+    const uploadPlaceholder = document.getElementById('uploadPlaceholder');
+    const styleButtons = document.querySelectorAll('.style-btn');
+
+    // Style button handlers
+    styleButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        styleButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentStyle = btn.dataset.style;
+        if (originalImage) {
+          processImage(originalImage, parseInt(brightnessSlider.value));
+        }
+      });
+    });
+
+    // Atkinson Dithering
+    function applyAtkinsonDither(imageData, threshold) {
+      const data = imageData.data;
+      const width = imageData.width;
+      const height = imageData.height;
+      
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          const idx = (y * width + x) * 4;
+          
+          const oldPixel = data[idx];
+          const newPixel = oldPixel < threshold ? 0 : 255;
+          const error = oldPixel - newPixel;
+          
+          data[idx] = data[idx + 1] = data[idx + 2] = newPixel;
+          
+          const distributeError = (dx, dy) => {
+            if (x + dx >= 0 && x + dx < width && y + dy >= 0 && y + dy < height) {
+              const targetIdx = ((y + dy) * width + (x + dx)) * 4;
+              const errorAmount = error / 8;
+              data[targetIdx] += errorAmount;
+              data[targetIdx + 1] += errorAmount;
+              data[targetIdx + 2] += errorAmount;
+            }
+          };
+          
+          distributeError(1, 0);
+          distributeError(2, 0);
+          distributeError(-1, 1);
+          distributeError(0, 1);
+          distributeError(1, 1);
+          distributeError(0, 2);
+        }
+      }
+      
+      return imageData;
+    }
+
+    // Floyd-Steinberg Dithering
+    function applyFloydSteinberg(imageData, threshold) {
+      const data = imageData.data;
+      const width = imageData.width;
+      const height = imageData.height;
+      
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          const idx = (y * width + x) * 4;
+          
+          const oldPixel = data[idx];
+          const newPixel = oldPixel < threshold ? 0 : 255;
+          const error = oldPixel - newPixel;
+          
+          data[idx] = data[idx + 1] = data[idx + 2] = newPixel;
+          
+          const distributeError = (dx, dy, factor) => {
+            if (x + dx >= 0 && x + dx < width && y + dy >= 0 && y + dy < height) {
+              const targetIdx = ((y + dy) * width + (x + dx)) * 4;
+              const errorAmount = error * factor;
+              data[targetIdx] += errorAmount;
+              data[targetIdx + 1] += errorAmount;
+              data[targetIdx + 2] += errorAmount;
+            }
+          };
+          
+          distributeError(1, 0, 7/16);
+          distributeError(-1, 1, 3/16);
+          distributeError(0, 1, 5/16);
+          distributeError(1, 1, 1/16);
+        }
+      }
+      
+      return imageData;
+    }
+
+    // Ordered (Bayer) Dithering
+    function applyOrderedDither(imageData, threshold) {
+      const data = imageData.data;
+      const width = imageData.width;
+      const height = imageData.height;
+      
+      const bayerMatrix = [
+        [0, 8, 2, 10],
+        [12, 4, 14, 6],
+        [3, 11, 1, 9],
+        [15, 7, 13, 5]
+      ];
+      
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          const idx = (y * width + x) * 4;
+          const bayerValue = bayerMatrix[y % 4][x % 4];
+          const adjustedThreshold = threshold + (bayerValue - 7.5) * 8;
+          
+          const oldPixel = data[idx];
+          const newPixel = oldPixel < adjustedThreshold ? 0 : 255;
+          
+          data[idx] = data[idx + 1] = data[idx + 2] = newPixel;
+        }
+      }
+      
+      return imageData;
+    }
+
+    // Random Dithering
+    function applyRandomDither(imageData, threshold) {
+      const data = imageData.data;
+      const width = imageData.width;
+      const height = imageData.height;
+      
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          const idx = (y * width + x) * 4;
+          
+          const oldPixel = data[idx];
+          const randomThreshold = threshold + (Math.random() - 0.5) * 50;
+          const newPixel = oldPixel < randomThreshold ? 0 : 255;
+          
+          data[idx] = data[idx + 1] = data[idx + 2] = newPixel;
+        }
+      }
+      
+      return imageData;
+    }
+
+    function processImage(img, brightnessVal) {
+      if (!img) return;
+
+      canvas.width = img.width;
+      canvas.height = img.height;
+      
+      ctx.drawImage(img, 0, 0);
+      
+      let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+      
+      // Convert to grayscale
+      for (let i = 0; i < data.length; i += 4) {
+        const gray = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
+        data[i] = data[i + 1] = data[i + 2] = gray;
+      }
+      
+      // Apply selected dithering algorithm
+      switch(currentStyle) {
+        case 'atkinson':
+          imageData = applyAtkinsonDither(imageData, brightnessVal);
+          break;
+        case 'floyd':
+          imageData = applyFloydSteinberg(imageData, brightnessVal);
+          break;
+        case 'ordered':
+          imageData = applyOrderedDither(imageData, brightnessVal);
+          break;
+        case 'random':
+          imageData = applyRandomDither(imageData, brightnessVal);
+          break;
+      }
+      
+      ctx.putImageData(imageData, 0, 0);
+    }
+
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const img = new Image();
+          img.onload = () => {
+            originalImage = img;
+            processImage(img, parseInt(brightnessSlider.value));
+            canvas.classList.add('active');
+            uploadPlaceholder.classList.add('hidden');
+            saveBtn.disabled = false;
+          };
+          img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    brightnessSlider.addEventListener('input', (e) => {
+      const value = e.target.value;
+      brightnessValue.textContent = value;
+      if (originalImage) {
+        processImage(originalImage, parseInt(value));
+      }
+    });
+
+    saveBtn.addEventListener('click', () => {
+      if (!canvas) return;
+      const link = document.createElement('a');
+      link.download = `${currentStyle}-dithered.png`;
+      link.href = canvas.toDataURL();
+      link.click();
+    });
+  </script>
+</body>
+</html>
