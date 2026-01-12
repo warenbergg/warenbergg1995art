@@ -515,3 +515,107 @@ body.dark-mode .still-box {
   gap: 12px;
   margin-top: 16px;
 }
+
+.info-card-container {
+  margin-top: 2rem;
+  padding: 0 1rem;
+  max-width: 800px; /* Sesuaikan dengan layout */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* info terbaru  */
+/* =========================
+   INFO SECTION (BLENDED)
+========================= */
+.info-section {
+  max-width: 100%;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  /* Garis tipis di atas sebagai pemisah visual yang elegan */
+  border-top: 1px solid rgba(0, 0, 0, 0.1); 
+  transition: border-color 0.3s ease;
+}
+
+/* Layout 2 Kolom (Kiri Judul, Kanan Teks) agar terlihat editorial */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Kiri 1 bagian, Kanan 2 bagian */
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Tipografi Judul Besar */
+.info-header h3 {
+  font-family: 'Poppins', sans-serif; /* Atau font utama Anda */
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* Meta Data (Tahun & Penulis) */
+.info-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.year-badge {
+  display: inline-block;
+  font-family: monospace; /* Font coding untuk kesan retro */
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.6;
+}
+
+.author-name {
+  font-size: 0.9rem;
+  font-weight: 400;
+  opacity: 0.5;
+  font-style: italic;
+}
+
+/* Deskripsi */
+.info-body p {
+  font-size: 1.05rem;
+  line-height: 1.7; /* Spasi baris lega agar mudah dibaca */
+  margin: 0;
+  opacity: 0.9;
+  max-width: 65ch; /* Batas lebar bacaan ideal */
+}
+
+/* =========================
+   DARK MODE ADAPTATION
+========================= */
+/* Otomatis menyesuaikan garis dan teks saat gelap */
+body.dark-mode .info-section {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .info-header h3 {
+  color: #fff;
+}
+
+body.dark-mode .year-badge,
+body.dark-mode .author-name {
+  color: #aaa; /* Abu-abu terang */
+}
+
+body.dark-mode .info-body p {
+  color: #ddd; /* Putih tulang */
+}
+
+/* RESPONSIVE (HP) */
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr; /* Tumpuk jadi 1 kolom di HP */
+    gap: 1rem;
+  }
+  
+  .info-header h3 {
+    font-size: 1.5rem;
+  }
+}

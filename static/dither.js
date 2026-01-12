@@ -393,3 +393,64 @@ function renderStill() {
   stillCtx.font = "500 12px Poppins";
   stillCtx.fillText("© 2025 warenbergg1995", 40, STILL_HEIGHT - 40);
 }
+
+/* =========================
+   KNOWLEDGE BASE (Data Jurnal)
+========================= */
+const algoInfo = {
+  atkinson: {
+    title: "Atkinson Dither",
+    year: "1984",
+    author: "Bill Atkinson (Apple Macintosh Team)",
+    desc: "Ditemukan oleh Bill Atkinson untuk komputer Apple Macintosh orisinal (MacPaint). Algoritma ini hanya menyebarkan 3/4 dari error kuantisasi ke piksel tetangga. Sisa error 'dibuang', yang mencegah pola lumpur (muddy patterns) dan menghasilkan gambar dengan kontras tinggi yang sangat bersih di area terang.",
+  },
+  floyd: {
+    title: "Floyd-Steinberg",
+    year: "1976",
+    author: "Robert Floyd & Louis Steinberg",
+    desc: "Standar emas dalam 'Error Diffusion' yang dipublikasikan dalam jurnal SID. Algoritma ini menyebarkan 100% error ke empat piksel tetangga (7/16, 3/16, 5/16, 1/16). Hasilnya adalah gradasi yang paling halus dan akurat secara matematis, namun sering terlihat lebih 'bising' (grainy) dibanding Atkinson.",
+  },
+  ordered: {
+    title: "Ordered Dither (Bayer)",
+    year: "1973",
+    author: "Bryce Bayer (Kodak)",
+    desc: "Dikembangkan oleh penemu yang sama dengan Filter Bayer pada kamera modern. Teknik ini tidak menyebarkan error, melainkan menggunakan pola matriks ambang batas (threshold map) yang tetap (4x4). Hasilnya adalah pola silang (crosshatch) yang sangat teratur, cepat dikomputasi, dan stabil untuk animasi.",
+  },
+  random: {
+    title: "Random Dither (Noise)",
+    year: "N/A",
+    author: "Konsep Matematika Dasar",
+    desc: "Bentuk paling primitif dari dithering. Algoritma ini menambahkan 'white noise' acak ke setiap piksel sebelum dikuantisasi. Meskipun hasilnya kasar dan tidak rapi, teknik ini sering digunakan untuk efek artistik 'film grain' atau tekstur berpasir yang estetik.",
+  }
+};
+
+// Fungsi Update Info
+function updateInfoCard(styleKey) {
+  const data = algoInfo[styleKey];
+  if (!data) return;
+
+  document.getElementById("infoTitle").textContent = data.title;
+  document.getElementById("infoYear").textContent = data.year;
+  document.getElementById("infoAuthor").textContent = data.author;
+  document.getElementById("infoDesc").textContent = data.desc;
+}
+
+/* =========================
+   UPDATE EVENT LISTENER
+========================= */
+// Cari bagian "STYLE BUTTONS" yang lama, dan tambahkan pemanggilan updateInfoCard
+styleButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    styleButtons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentStyle = btn.dataset.style;
+    
+    // --> TAMBAHAN BARU DI SINI
+    updateInfoCard(currentStyle); 
+    
+    processImage();
+  });
+});
+
+// Panggil sekali saat load agar default (Atkinson) muncul
+updateInfoCard("atkinson");
