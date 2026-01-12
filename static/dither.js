@@ -65,29 +65,47 @@ styleButtons.forEach((btn) => {
 /* =========================
    DITHER ALGORITHMS
 ========================= */
+// Helper clamp yang efisien
+// const clamp = (v) => v < 0 ? 0 : (v > 255 ? 255 : v);
+
 function atkinsonDither(img, threshold, levels) {
   const { data, width, height } = img;
+  // Pre-calculate untuk performa
+  const is1Bit = levels === 2;
 
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
       const i = (y * width + x) * 4;
-
+      
+      //ambil pixel asli
       const oldPixel = data[i];
-      const q = quantize(oldPixel < threshold ? 0 : 255, levels);
+      
+      let q ;
+      if (is1Bit) {
+        // Mode 1-bit: Gunakan Threshold Slider
+        q = oldPixel < threshold ? 0 : 255;
+      } else {
+        // Mode Multi-bit: Gunakan Quantize (abaikan threshold slider)
+        q = quantize(oldPixel, levels);
+      }
+      
       const error = oldPixel - q;
 
+      // Set pixel saat ini
       data[i] = data[i + 1] = data[i + 2] = q;
 
-      const spread = error / 8;
+      // Spread error (Atkinson factor = 1/8)
+      const spread = error >> 3; // Bitwise shift untuk bagi 8 (lebih cepat dikit)
+
+      if (spread === 0) continue; // Skip jika tidak ada error berarti
 
       const diffuse = (dx, dy) => {
         const nx = x + dx;
         const ny = y + dy;
         if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
           const ni = (ny * width + nx) * 4;
-          data[ni]     = clamp(data[ni]     + spread);
-          data[ni + 1] = clamp(data[ni + 1] + spread);
-          data[ni + 2] = clamp(data[ni + 2] + spread);
+          const val = data[ni] + spread;
+          data[ni] = data[ni + 1] = data[ni + 2] = clamp(val);
         }
       };
 
@@ -101,7 +119,6 @@ function atkinsonDither(img, threshold, levels) {
   }
   return img;
 }
-
 function floydSteinbergDither(img, threshold, levels) {
   const { data, width, height } = img;
 
@@ -109,21 +126,29 @@ function floydSteinbergDither(img, threshold, levels) {
     for (let x = 0; x < width; x++) {
       const i = (y * width + x) * 4;
 
+      //ambil pixel asli
       const oldPixel = data[i];
-      const q = quantize(oldPixel < threshold ? 0 : 255, levels);
+      
+      let q ;
+      // jika bit depth  = 1 (level = 2), gunakan Threshold slider
+      if (levels === 2){
+        q = oldPixel < threshold ? 0 : 255;
+      }else{
+        //jika multibit , abaikan threshold slider, gunakan quatize langsung pada pixel asli
+        q = quantize(oldPixel, levels)
+      }
       const error = oldPixel - q;
 
       data[i] = data[i + 1] = data[i + 2] = q;
 
+      // Floyd-Steinberg Factors: 7, 3, 5, 1 (/16)
       const diffuse = (dx, dy, factor) => {
         const nx = x + dx;
         const ny = y + dy;
         if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
           const ni = (ny * width + nx) * 4;
-          const val = error * factor;
-          data[ni]     = clamp(data[ni]     + val);
-          data[ni + 1] = clamp(data[ni + 1] + val);
-          data[ni + 2] = clamp(data[ni + 2] + val);
+          const val = data[ni] + (error * factor);
+          data[ni] = data[ni + 1] = data[ni + 2] = clamp(val);
         }
       };
 
@@ -138,7 +163,9 @@ function floydSteinbergDither(img, threshold, levels) {
 
 function orderedDither(img, threshold, levels) {
   const { data, width, height } = img;
+  const is1Bit = levels === 2;
 
+  // Matriks Bayer 4x4
   const bayer = [
     [0, 8, 2, 10],
     [12, 4, 14, 6],
@@ -146,12 +173,43 @@ function orderedDither(img, threshold, levels) {
     [15, 7, 13, 5],
   ];
 
+  // Hitung seberapa besar "jarak" antar warna
+  // Misal 4-bit (16 level), jaraknya sekitar 17 poin.
+  // Pola dither harus mengisi jarak ini agar gradasi terlihat halus.
+  const step = 255 / (levels - 1);
+
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
       const i = (y * width + x) * 4;
+      const oldPixel = data[i];
+
+      // Ambil nilai dari map Bayer (0 s/d 15)
       const b = bayer[y % 4][x % 4];
-      const t = threshold + (b - 7.5) * 8;
-      const q = quantize(data[i] < t ? 0 : 255, levels);
+      
+      let q;
+
+      if (is1Bit) {
+        // --- LOGIKA 1-BIT (Hitam Putih Murni) ---
+        // Menggunakan Threshold Slider + Pola Bayer
+        // (b - 7.5) membuat nilai berkisar antara -7.5 sampai 7.5
+        // Dikali 8 agar spread-nya cukup lebar
+        const t = threshold + (b - 7.5) * 8;
+        q = oldPixel < t ? 0 : 255;
+
+      } else {
+        // --- LOGIKA MULTI-BIT (2-bit / 4-bit) ---
+        // Kita harus menambahkan pola Bayer ke pixel ASLI sebelum di-quantize.
+        
+        // Normalisasi nilai bayer menjadi range -0.5 sampai 0.5
+        const mapValue = (b / 16.0) - 0.5;
+        
+        // Kalikan dengan 'step' agar noise sesuai dengan kedalaman bit
+        const ditherValue = mapValue * step;
+        
+        // Tambahkan noise ke pixel asli, lalu quantize
+        q = quantize(clamp(oldPixel + ditherValue), levels);
+      }
+
       data[i] = data[i + 1] = data[i + 2] = q;
     }
   }
@@ -160,10 +218,22 @@ function orderedDither(img, threshold, levels) {
 
 function randomDither(img, threshold, levels) {
   const { data } = img;
+  const is1Bit = levels === 2;
 
   for (let i = 0; i < data.length; i += 4) {
-    const rand = threshold + (Math.random() - 0.5) * 50;
-    const q = quantize(data[i] < rand ? 0 : 255, levels);
+    const oldPixel = data[i];
+    let q;
+
+    if (is1Bit) {
+      // Noise ditambahkan ke threshold
+      const noise = (Math.random() - 0.5) * 50; 
+      q = oldPixel < (threshold + noise) ? 0 : 255;
+    } else {
+      // Noise ditambahkan ke pixel sebelum dikuantisasi
+      const noise = (Math.random() - 0.5) * 20; 
+      q = quantize(clamp(oldPixel + noise), levels);
+    }
+
     data[i] = data[i + 1] = data[i + 2] = q;
   }
   return img;
