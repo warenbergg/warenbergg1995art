@@ -145,10 +145,10 @@ body.dark-mode .navbar {
   font-size: 13px;
 }
 .desc .center {
-  max-width: 300px;
+  max-width: 500px;
   text-align: center;
   font-weight: 300;
-  font-size: 12px;
+  font-size: 13px;
 }
 
 /* ========== RUNNING TEXT (MARQUEE) ========== */
