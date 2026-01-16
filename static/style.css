@@ -317,41 +317,164 @@ body.dark-mode .navbar {
   margin-top: 10px;
 }
 
-/* ========== BIG LINK STYLE ========== */
-.big-link {
+/* ========== BIG LINK SECTION (LIST STYLE) ========== */
+.big-link-container {
+  width: 100%;
+  margin: 80px 0;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  margin-top: 40px;
-  padding: 12px 0;
+  flex-direction: column;
 }
 
-.big-link-text {
+.big-link-item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 10px;
-}
-
-/* Judul */
-.big-link h2 {
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  margin: 0;
-}
-
-/* Arrow */
-.big-link a {
   text-decoration: none;
-  font-size: 22px;
-  font-weight: 700;
+  padding: 40px 0;
   color: inherit;
-  transition: transform 0.3s ease;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.big-link:hover a {
-  transform: translateX(4px);
+/* Garis pemisah antar link (muncul mulai dari item ke-2) */
+.big-link-item + .big-link-item {
+  border-top: 1px solid #000;
+}
+
+/* Bagian Teks */
+.content-left h2 {
+  font-size: 60px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.content-left h2 .outline {
+  color: transparent;
+  -webkit-text-stroke: 1px #000;
+  transition: 0.3s ease;
+}
+
+/* Tombol Panah */
+.arrow-btn {
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s ease, background 0.4s ease;
+}
+
+/* Bagian Gambar */
+.content-right img {
+  width: 300px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  filter: grayscale(100%);
+  transform: rotate(-3deg);
+  transition: all 0.5s ease;
+  opacity: 0; /* Gambar sembunyi dulu biar rapi */
+  visibility: hidden;
+  transform: translateX(20px) rotate(-3deg);
+}
+
+/* Saat Hover pada Container Item */
+.big-link-item:hover {
+  background: #f9f9f9;
+}
+
+.big-link-item:hover .content-left h2 .outline {
+  color: #000;
+}
+
+.big-link-item:hover .arrow-btn {
+  background: #000;
+  color: #fff;
+  transform: rotate(45deg);
+}
+
+/* Gambar muncul saat hover */
+.big-link-item:hover .content-right img {
+  opacity: 1;
+  visibility: visible;
+  filter: grayscale(0%);
+  transform: translateX(0) rotate(0deg) scale(1.05);
+}
+
+/* Variasi rotasi gambar link ke-2 (biar beda arah) */
+.big-link-item:nth-child(even) .content-right img {
+  transform: translateX(20px) rotate(3deg);
+}
+.big-link-item:nth-child(even):hover .content-right img {
+  transform: translateX(0) rotate(0deg) scale(1.05);
+}
+
+
+/* ========== DARK MODE ADAPTATION ========== */
+.dark-mode .big-link-container {
+  border-color: #333;
+}
+.dark-mode .big-link-item + .big-link-item {
+  border-color: #333; /* Warna garis pemisah mode gelap */
+}
+
+.dark-mode .content-left h2 .outline {
+  -webkit-text-stroke: 1px #fff;
+}
+.dark-mode .big-link-item:hover .content-left h2 .outline {
+  color: #fff;
+}
+
+.dark-mode .arrow-btn {
+  border-color: #fff;
+  color: #fff;
+}
+.dark-mode .big-link-item:hover .arrow-btn {
+  background: #fff;
+  color: #000;
+}
+.dark-mode .big-link-item:hover {
+  background: #111;
+}
+
+/* ========== RESPONSIVE (MOBILE) ========== */
+@media (max-width: 768px) {
+  .big-link-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    padding: 30px 0;
+  }
+  
+  .content-left h2 {
+    font-size: 40px;
+  }
+
+  .arrow-btn {
+    margin: 0 auto;
+  }
+
+  /* Di HP, gambar selalu muncul (tidak sembunyi) agar user tau kontennya */
+  .content-right img {
+    opacity: 1;
+    visibility: visible;
+    width: 100%;
+    height: 200px;
+    transform: rotate(0deg);
+  }
+  
+  .big-link-item:nth-child(even) .content-right img {
+    transform: rotate(0deg);
+  }
 }
 
 /* ===== FOTO ===== */
