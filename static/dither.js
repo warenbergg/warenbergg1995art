@@ -421,7 +421,13 @@ const algoInfo = {
     year: "N/A",
     author: "Konsep Matematika Dasar",
     desc: "Bentuk paling primitif dari dithering. Algoritma ini menambahkan 'white noise' acak ke setiap piksel sebelum dikuantisasi. Meskipun hasilnya kasar dan tidak rapi, teknik ini sering digunakan untuk efek artistik 'film grain' atau tekstur berpasir yang estetik.",
-  }
+  },
+  grid: {
+    title: "Grid Art (Mosaic)",
+    year: "Retro Era",
+    author: "Pixelation Technique",
+    desc: "Teknik stilisasi yang membagi gambar menjadi blok-blok besar (grid). Setiap blok dianalisis rata-rata kecerahannya dan diisi dengan warna solid. Menciptakan estetika 'Pixel Art', 'Lego', atau kerajinan kristik (cross-stitch) yang minimalis.",
+  },
 };
 
 // Fungsi Update Info
@@ -454,3 +460,159 @@ styleButtons.forEach((btn) => {
 
 // Panggil sekali saat load agar default (Atkinson) muncul
 updateInfoCard("atkinson");
+
+/* =========================
+   GLOBAL STATE & SELECTORS
+========================= */
+// ... (variabel lama Anda) ...
+const gridControls = document.getElementById("gridControls");
+const gridColorInput = document.getElementById("gridColor");
+const blockSizeSlider = document.getElementById("blockSizeSlider");
+const blockSizeValue = document.getElementById("blockSizeValue");
+
+/* =========================
+   STYLE BUTTONS LISTENER (UPDATE)
+========================= */
+styleButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    styleButtons.forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    currentStyle = btn.dataset.style;
+
+    // Update Info Card (jika Anda pakai fitur info card)
+    if (typeof updateInfoCard === "function") updateInfoCard(currentStyle);
+
+    // Tampilkan kontrol khusus jika mode Grid dipilih
+    if (currentStyle === "grid") {
+      gridControls.classList.remove("hidden");
+      // Sembunyikan bit depth karena tidak dipakai di mode ini
+      document.querySelector('.bit-group').classList.add('hidden'); 
+    } else {
+      gridControls.classList.add("hidden");
+      document.querySelector('.bit-group').classList.remove('hidden');
+    }
+
+    processImage();
+  });
+});
+
+/* =========================
+   EVENT LISTENERS BARU
+========================= */
+gridColorInput.addEventListener("input", processImage);
+blockSizeSlider.addEventListener("input", () => {
+  blockSizeValue.textContent = blockSizeSlider.value;
+  processImage();
+});
+
+/* =========================
+   NEW ALGORITHM: GRID ART
+========================= */
+function gridArtRender(img, threshold, blockSize, colorHex) {
+  const { data, width, height } = img;
+  
+  // Konversi Hex Color ke RGB
+  const rT = parseInt(colorHex.slice(1, 3), 16);
+  const gT = parseInt(colorHex.slice(3, 5), 16);
+  const bT = parseInt(colorHex.slice(5, 7), 16);
+
+  // Loop per BLOCK (bukan per pixel)
+  for (let y = 0; y < height; y += blockSize) {
+    for (let x = 0; x < width; x += blockSize) {
+      
+      // 1. Hitung rata-rata kecerahan dalam blok ini
+      let totalBrightness = 0;
+      let count = 0;
+
+      for (let by = 0; by < blockSize; by++) {
+        for (let bx = 0; bx < blockSize; bx++) {
+          const px = x + bx;
+          const py = y + by;
+          if (px < width && py < height) {
+            const i = (py * width + px) * 4;
+            // Rumus luminance sederhana
+            const brightness = (data[i] + data[i+1] + data[i+2]) / 3;
+            totalBrightness += brightness;
+            count++;
+          }
+        }
+      }
+      
+      const avg = totalBrightness / count;
+
+      // 2. Tentukan warna blok berdasarkan Threshold
+      // Jika rata-rata pixel LEBIH GELAP dari threshold -> Warnai
+      // Jika lebih terang -> Putih/Transparan
+      
+      const isSolid = avg < threshold; 
+
+      // 3. Warnai seluruh blok
+      for (let by = 0; by < blockSize; by++) {
+        for (let bx = 0; bx < blockSize; bx++) {
+          const px = x + bx;
+          const py = y + by;
+          
+          // Efek 'Gap' kecil (opsional) agar terlihat seperti kotak terpisah
+          // Hapus 'if' di bawah jika ingin kotak menyatu penuh
+          if (bx === blockSize - 1 || by === blockSize - 1) continue; 
+
+          if (px < width && py < height) {
+            const i = (py * width + px) * 4;
+            
+            if (isSolid) {
+              data[i] = rT;
+              data[i+1] = gT;
+              data[i+2] = bT;
+              data[i+3] = 255; // Alpha penuh
+            } else {
+              // Background (Putih atau Transparan)
+              // Sesuaikan dengan CSS dark mode Anda jika mau
+              data[i] = 240; 
+              data[i+1] = 240;
+              data[i+2] = 240;
+              data[i+3] = 0; // 0 = Transparan (biar background web kelihatan)
+            }
+          }
+        }
+      }
+    }
+  }
+  return img;
+}
+
+/* =========================
+   PROCESS PIPELINE (UPDATE)
+========================= */
+function processImage() {
+  if (!originalImage) return;
+
+  const threshold = parseInt(thresholdSlider.value);
+  // Ambil nilai Block Size slider
+  const blockSize = parseInt(blockSizeSlider.value); 
+  // Ambil warna
+  const color = gridColorInput.value;
+  
+  const levels = Math.pow(2, parseInt(bitDepthSelect.value));
+
+  // ... (Kode setup canvas width/height yang lama tetap sama) ...
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const scale = Math.min(canvas.width / originalImage.width, canvas.height / originalImage.height);
+  const w = originalImage.width * scale;
+  const h = originalImage.height * scale;
+  const x = (canvas.width - w) / 2;
+  const y = (canvas.height - h) / 2;
+  ctx.drawImage(originalImage, x, y, w, h);
+  let img = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+  // --- SWITCH CASE UPDATE ---
+  switch (currentStyle) {
+    case "atkinson": img = atkinsonDither(img, threshold, levels); break;
+    case "floyd":    img = floydSteinbergDither(img, threshold, levels); break;
+    case "ordered":  img = orderedDither(img, threshold, levels); break;
+    case "random":   img = randomDither(img, threshold, levels); break;
+    // TAMBAHAN:
+    case "grid":     img = gridArtRender(img, threshold, blockSize, color); break;
+  }
+
+  ctx.putImageData(img, 0, 0);
+}

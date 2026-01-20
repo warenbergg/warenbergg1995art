@@ -619,3 +619,56 @@ body.dark-mode .info-body p {
     font-size: 1.5rem;
   }
 }
+
+/* =========================
+   PRINT SETTINGS
+   (Hanya cetak gambar hasil)
+========================= */
+@media print {
+  /* Sembunyikan semua elemen di body */
+  body * {
+    visibility: hidden;
+    overflow: visible;
+  }
+
+  /* Tampilkan hanya canvas utama */
+  #canvas, #canvas * {
+    visibility: visible;
+  }
+
+  /* Atur posisi canvas agar pas di kertas */
+  #canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;       /* Agar full width di kertas */
+    height: auto;      /* Rasio tetap terjaga */
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    z-index: 9999;     /* Pastikan di paling atas */
+  }
+
+  /* Sembunyikan background, navbar, dan modal */
+  .navbar, .footer, .controls, .still-modal {
+    display: none !important;
+  }
+  
+  body {
+    background: white; /* Hemat tinta printer */
+  }
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Warna input color agar selaras */
+input[type="color"] {
+  border: none;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  background: none;
+}

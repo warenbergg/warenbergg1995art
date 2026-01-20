@@ -9,36 +9,31 @@
 </head>
 
 <body>
-  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="navbar-content">
-      <h2 class="logo">ARTICLE.95</h2>
+      <h2 class="logo">ARTICLE.25</h2>
       <ul>
         <li><a href="/">WarenBergg</a></li>
-        <li><a href="/dither">2025</a></li>
+        <li><a href="/dither">25Explorer</a></li>
       </ul>
       <button id="darkModeToggle" class="dark-btn">🌙</button>
     </div>
   </nav>
 
-  <!-- MAIN CONTENT -->
   <div class="container">
-    <!-- HEADER -->
     <header class="header">
       <div class="header-top">
         <span>Project</span>
-        <h1>Atkinson<br>dither</h1>
+        <h1>25 Explorer :<br>Atkinson dither</h1>
         <span>2025</span>
       </div>
       <p>
-        Classic dithering algorithms - transform your images into retro 1-bit art with multiple styles.
+        A study in algorithmic aesthetics. Rediscovering classic dithering methods to transform modern moments into timeless, retro 1-bit art.
       </p>
     </header>
 
-    <!-- TOOL -->
     <div class="tool-container">
       <div class="tool-grid">
-        <!-- Canvas Area -->
         <div class="canvas-container">
           <div id="uploadPlaceholder" class="upload-placeholder">
             <button class="btn" onclick="document.getElementById('fileInput').click()">
@@ -49,9 +44,7 @@
           <input type="file" id="fileInput" accept="image/*">
         </div>
 
-        <!-- Controls -->
         <div class="controls">
-          <!-- Style Selector -->
           <div class="style-group">
             <label>Dither Style</label>
             <div class="style-buttons">
@@ -59,19 +52,34 @@
               <button class="style-btn" data-style="floyd">Floyd-Steinberg</button>
               <button class="style-btn" data-style="ordered">Ordered (Bayer)</button>
               <button class="style-btn" data-style="random">Random</button>
+              <button class="style-btn" data-style="grid">Grid Art</button>
             </div>
           </div>
-          <!-- Bit Depth Selector -->
-<div class="bit-group">
-  <label>Bit Depth</label>
-  <select id="bitDepth">
-    <option value="1">1-bit (Black / White)</option>
-    <option value="2">2-bit (4 Levels)</option>
-    <option value="4">4-bit (16 Levels)</option>
-  </select>
-</div>
 
-          <!-- Threshold Slider -->
+          <div id="gridControls" class="hidden" style="margin-bottom: 1.5rem; padding: 12px; background: rgba(127,127,127,0.1); border-radius: 8px; border: 1px solid rgba(127,127,127,0.2);">
+            <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 12px;">
+              <label style="margin:0; font-weight:600; font-size:0.9rem;">Grid Color:</label>
+              <input type="color" id="gridColor" value="#0055ff" style="border:none; width:30px; height:30px; cursor:pointer; background:none;">
+            </div>
+            
+            <div class="slider-group" style="margin-bottom:0;">
+              <label style="font-size:0.9rem;">Block Size</label>
+              <div class="slider-container">
+                <input type="range" id="blockSizeSlider" min="4" max="50" value="12">
+                <div class="slider-value" id="blockSizeValue">12</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bit-group">
+            <label>Bit Depth</label>
+            <select id="bitDepth">
+              <option value="1">1-bit (Black / White)</option>
+              <option value="2">2-bit (4 Levels)</option>
+              <option value="4">4-bit (16 Levels)</option>
+            </select>
+          </div>
+
           <div class="slider-group">
             <label>Threshold</label>
             <div class="slider-container">
@@ -108,7 +116,6 @@
       </div>
     </div>
     
-<!-- info -->
     <section class="info-section">
       <div class="info-grid">
         <div class="info-header">
@@ -127,35 +134,30 @@
       </div>
     </section>
 
-  <!-- =========================
-     STILL EXPORT MODAL
-========================= -->
-<div id="stillModal" class="still-modal hidden">
-  <div class="still-box">
-    <canvas id="stillCanvas"></canvas>
+  <div id="stillModal" class="still-modal hidden">
+    <div class="still-box">
+      <canvas id="stillCanvas"></canvas>
 
-    <div class="still-actions">
-      <button class="btn" id="exportStill">Export Noices</button>
-      <button class="btn" id="closeStill">Cancel</button>
+      <div class="still-actions">
+        <button class="btn" id="exportStill">Export Noices</button>
+        <button class="btn" id="closeStill">Cancel</button>
+      </div>
     </div>
   </div>
-</div>
 
 
-  <!-- FOOTER -->
   <footer class="footer">
-    <p class="title">Randy Ardiansyah</p>
+    <p class="title">1995</p>
     <p class="subtitle">Coding • Visual • Art</p>
     <div class="social-links">
       <a href="#" target="_blank">Instagram</a>
-      <a href="#" target="_blank">Github</a>
+      <a href="https://github.com/warenbergg" target="_blank">Github</a>
       <a href="https://scrapbox.io/WarenBergg1995/" target="_blank">scrapbox.io</a>
       <a href="https://x.com/warenbergg1995" target="_blank">X</a>
     </div>
-    <p class="copyright">© 2025  RandyArdiansyah. All Rights Reserved.</p>
+    <p class="copyright">© 2025 WarenBergg1995 All Rights Reserved.</p>
   </footer>
 
-  <!-- JAVASCRIPT -->
   <script src="/static/dither.js"></script>
 </body>
 </html>
