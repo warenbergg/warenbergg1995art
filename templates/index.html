@@ -14,7 +14,7 @@
     <div class="navbar-content">
       <h2 class="logo">ARTICLE.1995</h2>
       <ul>
-        <li><a href="/"></a>WarenBergg</li>
+        <li><a href="/">WarenBergg</a></li>
         <li><a href="/dither">25Explorer</a></li>
       </ul>
       <button id="darkModeToggle" class="dark-btn">🌙</button>
@@ -49,7 +49,9 @@
     <div class="track">
       {% for v in videos %}
       <div class="card">
-        <video src="{{ v }}" autoplay muted loop playsinline></video>
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="{{ v }}" type="video/mp4">
+        </video>        
       </div>
       {% endfor %}
     </div>
