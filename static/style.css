@@ -87,7 +87,7 @@ body.dark-mode .navbar {
 
 .navbar .logo {
   font-weight: 700;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .navbar ul {
@@ -129,12 +129,15 @@ body.dark-mode .navbar {
   font-weight: 600;
   font-size: 14px;
   margin-bottom: 40px;
+  padding-top: 24px;
+  padding-bottom: 16px;
 }
 .topbar h1 {
-  font-size: 48px;
+  font-size: 50px;
   font-weight: 700;
   line-height: 42px;
   text-align: center;
+  margin-top: 12px;
 }
 
 /* ========== DESCRIPTION TEXT ========== */
@@ -184,9 +187,10 @@ body.dark-mode .navbar {
 
 .track {
   display: flex;
+  width: max-content;
   align-items: center;
   gap: 10px;
-  animation: scrollImages 18s linear infinite;
+  animation: scrollImages 12s linear infinite;
   white-space: nowrap;
 }
 
@@ -196,7 +200,7 @@ body.dark-mode .navbar {
 
 @keyframes scrollImages {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(-100%); }
 }
 
 .card {

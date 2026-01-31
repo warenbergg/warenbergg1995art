@@ -44,12 +44,12 @@ body.dark-mode .navbar {
 
 .navbar .logo {
   font-weight: 700;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 .navbar ul {
   display: flex;
-  gap: 24px;
+  gap: 16px;
   list-style: none;
 }
 
@@ -98,22 +98,26 @@ body.dark-mode .navbar {
   margin-bottom: 24px;
   font-size: 14px;
   font-weight: 600;
+  margin-bottom: 32px;
+
 }
 
 .header h1 {
-  font-size: 60px;
+  font-size: 50px;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 42px;
+  text-align: center;
+  margin-top: 12px;
+  letter-spacing: -0.02em;
   margin-bottom: 16px;
+
 }
 
 .header p {
   font-size: 13px;
-  opacity: 0.7;
   max-width: 500px;
-  margin: 0 auto;
-  line-height: 1.6;
-}
+  margin: 0 auto; 
+  text-align: center;}
 
 /* Main Tool */
 .tool-container {
@@ -419,6 +423,8 @@ body.dark-mode .slider-container input[type="range"]::-webkit-slider-thumb {
   opacity: 1;
 }
 
+
+
 /* Footer */
 .footer {
   margin-top: 120px;
@@ -580,7 +586,7 @@ body.dark-mode .still-box {
 
 /* Deskripsi */
 .info-body p {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   line-height: 1.7; /* Spasi baris lega agar mudah dibaca */
   margin: 0;
   opacity: 0.9;
