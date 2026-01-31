@@ -24,7 +24,7 @@
   <div class="container">
   <header class="topbar">
     <span></span>
-    <h1>1995<br>WarenBergg</h1>
+    <h1>1995 WarenBergg</h1>
     <span></span>
   </header>
 
@@ -56,6 +56,19 @@
       {% endfor %}
     </div>
   </section>
+
+  <section class="statement">
+    <h1>
+      Good design is a conversation
+      <span class="inline-img">
+        <img src="{{ url_for('static', filename='images/iconXX.png') }}" alt="">
+      </span>
+      between intention and emotion
+    </h1>
+  </section>
+  
+  
+
   <!-- BIG LINK HEADING -->
   <div class="big-link-container">
   
@@ -117,6 +130,7 @@
   });
 });
 
+
   // Duplicate isi track agar bisa infinite scroll effect
   const track = document.querySelector('.track');
   track.innerHTML += track.innerHTML;
@@ -151,6 +165,14 @@
       let y = (e.clientY / window.innerHeight - 0.5) * 10;
       firstVideo.style.transform = `translate(${x}px, ${y}px)`;
   });
+  const statement = document.querySelector('.statement');
+
+window.addEventListener('scroll', () => {
+  const top = statement.getBoundingClientRect().top;
+  if (top < window.innerHeight * 0.8) {
+    statement.classList.add('show');
+  }
+});
   </script>
   
 </body>

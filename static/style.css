@@ -68,7 +68,7 @@ body {
   z-index: 100;
   backdrop-filter: blur(12px);
   background: rgba(255, 255, 255, 0.8);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: none;
 }
 
 body.dark-mode .navbar {
@@ -126,18 +126,16 @@ body.dark-mode .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: 600;
+  margin-bottom: 24px;
   font-size: 14px;
-  margin-bottom: 40px;
-  padding-top: 24px;
-  padding-bottom: 16px;
+  font-weight: 600;
+  margin-bottom: 32px;
 }
 .topbar h1 {
-  font-size: 50px;
-  font-weight: 700;
-  line-height: 42px;
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  letter-spacing: -0.03em;
+  line-height: 0.9;
   text-align: center;
-  margin-top: 12px;
 }
 
 /* ========== DESCRIPTION TEXT ========== */
@@ -502,5 +500,61 @@ body.dark-mode .navbar {
 /* Dark mode */
 .dark-mode .big-link img {
   opacity: 0.9;
+}
+
+/* ========== QUOTE SECTION ========== */
+/* ========== STATEMENT SECTION ========== */
+/* ========== STATEMENT WITH INLINE IMAGE ========== */
+.statement {
+  margin: 140px 0;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.statement h1 {
+  font-size: clamp(3rem, 7vw, 6rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  max-width: 16ch;
+}
+
+/* Inline image */
+.inline-img {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin: 0 0.15em;
+}
+
+.inline-img img {
+  height: 0.9em;       /* KUNCI: ikut tinggi font */
+  width: auto;
+  transform: translateY(0.08em); /* sejajarkan baseline */
+}
+.dark-mode .inline-img img {
+  filter: brightness(1.1);
+}
+@media (max-width: 768px) {
+  .statement {
+    margin: 100px 0;
+  }
+
+  .statement h1 {
+    font-size: clamp(2.4rem, 9vw, 3.5rem);
+    max-width: 14ch;
+  }
+
+  .inline-img img {
+    height: 0.85em;
+  }
+}
+.inline-img img {
+  transition: transform 0.6s ease;
+}
+
+.statement:hover .inline-img img {
+  transform: translateY(0.08em) scale(1.05);
 }
 
