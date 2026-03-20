@@ -10,6 +10,28 @@
 </head>
 
 <body>
+  <!-- bungkus -->
+  <div id="introOverlay" class="intro-overlay hidden">
+    <div class="intro-box">
+  
+      <div class="intro-left">
+        <img src="{{ url_for('static', filename='images/bergg.jpg') }}" alt="Randy">
+      </div>
+  
+      <div class="intro-right">
+        <h1>Currated <br> by <br> Randy Ardiansyah</h1>
+        <p> project from 25 25Explorer</p>
+        <button id="closeIntro" class="enter-btn">
+          himself
+        </button>
+      </div>
+  
+    </div>
+  </div>
+  
+    </div>
+  </div>
+  <!-- end -->
   <nav class="navbar">
     <div class="navbar-content">
       <h2 class="logo">1995</h2>
@@ -21,10 +43,13 @@
     </div>
   </nav>
 
+
   <div class="container">
   <header class="topbar">
     <span></span>
-    <h1>1995 WarenBergg</h1>
+    <h1 id="openIntro" class="intro-trigger">
+      1995 warenbergg
+    </h1>
     <span></span>
   </header>
 
@@ -173,6 +198,29 @@ window.addEventListener('scroll', () => {
     statement.classList.add('show');
   }
 });
+  const openBtn = document.getElementById("openIntro");
+  const overlay = document.getElementById("introOverlay");
+  const closeBtn = document.getElementById("closeIntro");
+
+  // buka popup
+  openBtn.addEventListener("click", () => {
+    overlay.classList.add("show");
+    document.body.style.overflow = "hidden";
+  });
+
+  // tombol close
+  closeBtn.addEventListener("click", () => {
+    overlay.classList.remove("show");
+    document.body.style.overflow = "auto";
+  });
+
+  // klik luar untuk close
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove("show");
+      document.body.style.overflow = "auto";
+    }
+  });
   </script>
   
 </body>
