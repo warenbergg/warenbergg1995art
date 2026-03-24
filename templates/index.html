@@ -23,15 +23,7 @@
           <li><a href="#work">WORK</a></li>
           <li><a href="#about">ABOUT</a></li>
           <li><a href="/dither">dither</a></li>
-          <li><a href="#projects">START A PROJECT</a></li>
         </ul>
-      </div>
-
-      <div class="nav-right">
-        <div class="news-ticker">
-          <span class="news-label">NEWS:</span>
-          <span class="news-text">WEBSITE IS NOW LIVE! 🎉 • EXPLORE NEW WORKS • CREATIVE CODING IN PROGRESS •</span>
-        </div>
       </div>
     </nav>
 
@@ -67,17 +59,36 @@
   </div>
 </section>
 
-  <!-- ===== CONTACT SECTION ===== -->
-  <section class="content-section" id="contact">
-    <h2 class="section-title">Get In Touch</h2>
-    <p class="section-content">
-      Let's create something extraordinary together. Reach out and let's collaborate.
-    </p>
-    <div class="contact-links">
-      <a href="https://instagram.com" class="contact-link" target="_blank">Instagram</a>
-      <a href="https://github.com/warenbergg" class="contact-link" target="_blank">Github</a>
-      <a href="https://scrapbox.io/WarenBergg1995/" class="contact-link" target="_blank">Scrapbox</a>
-      <a href="https://x.com/warenbergg1995" class="contact-link" target="_blank">X / Twitter</a>
+  <!-- ===== PROJECTS SECTION ===== -->
+  <section class="content-section" id="projects">
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="card-background"></div>
+        <div class="card-content">
+          <h3>Project Tesis</h3>
+          <p>EndOfYear 2024 - Explore my research and creative exploration on Google Colab</p>
+          <a href="https://colab.research.google.com/drive/1TpDNeSrHazXwYj8acuhk3JMOpUKoDRtb?usp=sharing" class="card-button" target="_blank">Visit Project</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="card-background"></div>
+        <div class="card-content">
+          <h3>Visual Archive</h3>
+          <p>MiddleOfYear 2025 - Discover more visual works and creative explorations</p>
+          <a href="https://scrapbox.io/WarenBergg1995/" class="card-button" target="_blank">Visit Scrapbox</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="card-background"></div>
+        <div class="card-content">
+          <h3>Follow Me</h3>
+          <p>Stay updated with my latest works and creative journey on social media</p>
+          <a href="https://x.com/warenbergg1995" class="card-button" target="_blank">Follow on X</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -124,6 +135,17 @@ workScroll.addEventListener('mousemove', (e) => {
         }
       });
     });
+
+    // Animate project cards on scroll
+    const projectCards = document.querySelectorAll('.project-card');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    projectCards.forEach(card => observer.observe(card));
 
     // Duplicate isi track agar bisa infinite scroll effect (jika ada)
     const track = document.querySelector('.track');
