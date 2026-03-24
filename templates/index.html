@@ -198,20 +198,80 @@
     /* ===== WORK SECTION ===== */
     #work {
       background: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 6rem 3rem;
+      min-height: 100vh;
     }
 
-    .work-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      width: 100%;
-      max-width: 1200px;
+    .work-header {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      margin-bottom: 4rem;
+    }
+
+    .work-title {
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1.2;
+      color: #000;
+      max-width: 900px;
+      margin-bottom: 2rem;
+    }
+
+    .loading-indicator {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #000;
+      animation: pulse 1.5s ease-in-out infinite;
+      margin-top: 2rem;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+    }
+
+    .work-gallery {
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      overflow-x: auto;
+      overflow-y: hidden;
+      gap: 1.5rem;
+      padding-bottom: 2rem;
+      scroll-behavior: smooth;
+    }
+
+    .work-gallery::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .work-gallery::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
+
+    .work-gallery::-webkit-scrollbar-thumb {
+      background: #000;
+      border-radius: 3px;
     }
 
     .work-card {
-      aspect-ratio: 1;
+      flex: 0 0 400px;
+      height: 300px;
       background: #f5f5f5;
-      border-radius: 8px;
+      border-radius: 0;
       overflow: hidden;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -313,6 +373,19 @@
       .content-section {
         padding: 3rem 1.5rem;
       }
+
+      #work {
+        padding: 3rem 1.5rem;
+      }
+
+      .work-title {
+        font-size: 2rem;
+      }
+
+      .work-card {
+        flex: 0 0 280px;
+        height: 200px;
+      }
     }
   </style>
 </head>
@@ -355,9 +428,13 @@
   </section>
 
   <!-- ===== WORK SECTION ===== -->
-  <section class="content-section" id="work">
-    <h2 class="section-title">Work</h2>
-    <div class="work-grid">
+  <section id="work">
+    <div class="work-header">
+      <h2 class="work-title">STRATEGY-LED DESIGN & DEVELOPMENT FOR BRANDS ON THE RISE.</h2>
+      <div class="loading-indicator"></div>
+    </div>
+
+    <div class="work-gallery">
       {% for v in videos %}
       <div class="work-card">
         <video autoplay muted loop playsinline preload="metadata">
