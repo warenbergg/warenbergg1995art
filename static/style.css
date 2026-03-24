@@ -160,6 +160,16 @@ body {
   text-align: left;
   color: #000;
   letter-spacing: -0.02em;
+  cursor: pointer;
+  transition: font-style 0.3s ease;
+}
+
+.section-title.clickable:hover {
+  opacity: 0.7;
+}
+
+.section-title.italic {
+  font-style: italic;
 }
 
 .section-description {
@@ -390,6 +400,83 @@ body {
   transform: scale(1.05);
 }
 
+/* ===== CONTENT CARDS ===== */
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 2rem;
+}
+
+.content-card {
+  padding: 2rem;
+  background: #f9f9f9;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  transition: all 0.3s ease;
+}
+
+.content-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  background: #fff;
+}
+
+.content-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 1rem;
+}
+
+.content-card p {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.7;
+}
+
+/* ===== MOBILE NAVBAR ===== */
+@media (max-width: 768px) {
+  .nav-logo {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    border-bottom: 1px solid #eee;
+  }
+
+  .nav-links.open {
+    max-height: 300px;
+  }
+
+  .nav-links li {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .nav-links a {
+    color: #000;
+  }
+
+  .top-nav.scrolled .nav-links a {
+    color: #000;
+  }
+}
+
 /* ===== FOOTER ===== */
 footer {
   background: #f9f9f9;
@@ -406,6 +493,22 @@ footer p {
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .content-card {
+    padding: 1.5rem;
+  }
+
+  .content-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .content-card p {
+    font-size: 0.9rem;
+  }
+
   .brand-name {
     font-size: 12vw;
     bottom: 2rem;

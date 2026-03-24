@@ -18,8 +18,8 @@
     <!-- TOP NAVIGATION -->
     <nav class="top-nav">
       <div class="nav-left">
-        <div class="nav-logo">warenbergg</div>
-        <ul class="nav-links">
+        <div class="nav-logo" id="navToggle">warenbergg</div>
+        <ul class="nav-links" id="navMenu">
           <li><a href="#home">HOME</a></li>
           <li><a href="#work">WORK</a></li>
           <li><a href="#about">ABOUT</a></li>
@@ -35,7 +35,7 @@
   <!-- ===== ABOUT SECTION ===== -->
   <section class="content-section" id="about">
     <div class="section-wrapper">
-      <h2 class="section-title">About</h2>
+      <h2 class="section-title clickable">[ About ]</h2>
       <p class="about-text">
         A human named RANDY ARDIANSYAH, the mind behind the verbal and visual. An art enthusiast exploring creative coding with purpose and designing with soul. Inspired by faith, space, and endless possibilities. A Muslim creative navigating the universe alongside AI.
       </p>
@@ -47,7 +47,7 @@
 
 <section class="content-section" id="work">
   <div class="work-header">
-    <h2 class="section-title">Work</h2>
+    <h2 class="section-title clickable">[ Work ]</h2>
     <p class="section-description">Explore my creative projects and visual works. Each piece represents a journey of exploration, experimentation, and artistic expression through creative coding and visual design.</p>
   </div>
   <div class="work-scroll-wrapper" id="workScroll">
@@ -66,7 +66,7 @@
   <!-- ===== PROJECTS SECTION ===== -->
   <section class="content-section" id="projects">
     <div class="section-wrapper">
-      <h2 class="section-title">Projects</h2>
+      <h2 class="section-title clickable">[ Projects ]</h2>
       <p class="section-description">Discover my latest projects and collaborations. From research to creative coding, each project tells a unique story of innovation and artistic exploration.</p>
     </div>
     <div class="projects-grid">
@@ -99,6 +99,50 @@
     </div>
   </section>
 
+  <!-- ===== VISUAL SECTION ===== -->
+  <section class="content-section" id="visual">
+    <div class="section-wrapper">
+      <h2 class="section-title clickable">[ Visual ]</h2>
+      <p class="section-description">Visual design is the art of communicating ideas through imagery, color, and composition. Exploring the intersection of aesthetics and functionality to create meaningful visual experiences.</p>
+      <div class="content-grid">
+        <div class="content-card">
+          <h3>Color Theory & Composition</h3>
+          <p>Understanding how colors interact and how composition guides the viewer's eye. Every visual choice has a purpose and impact on the overall message.</p>
+        </div>
+        <div class="content-card">
+          <h3>Motion & Animation</h3>
+          <p>Bringing static designs to life through motion. Animation tells stories, guides interactions, and creates emotional connections with the audience.</p>
+        </div>
+        <div class="content-card">
+          <h3>Typography & Hierarchy</h3>
+          <p>The art of arranging type to make written language legible, readable, and visually appealing. Typography is a fundamental element of visual communication.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CREATIVE CODING SECTION ===== -->
+  <section class="content-section" id="coding">
+    <div class="section-wrapper">
+      <h2 class="section-title clickable">[ Creative Coding ]</h2>
+      <p class="section-description">Creative coding merges art and technology. Using code as a medium for artistic expression, generative design, and interactive experiences powered by algorithms and AI.</p>
+      <div class="content-grid">
+        <div class="content-card">
+          <h3>Generative Art & Algorithms</h3>
+          <p>Creating art through algorithms and mathematical functions. Generative systems produce unique, evolving artworks that explore the boundaries between order and chaos.</p>
+        </div>
+        <div class="content-card">
+          <h3>AI & Machine Learning</h3>
+          <p>Leveraging artificial intelligence to create intelligent systems, predictive models, and neural networks. AI opens new possibilities for creative exploration and problem-solving.</p>
+        </div>
+        <div class="content-card">
+          <h3>Interactive Experiences</h3>
+          <p>Building interactive installations, web experiences, and digital art. Code enables real-time interaction, creating immersive experiences that respond to user input.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== FOOTER ===== -->
   <footer>
     <p><strong>© 2025 Randy Ardiansyah</strong></p>
@@ -107,30 +151,59 @@
   </footer>
 
   <script>
+    // Mobile menu toggle
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+    let menuOpen = false;
+
+    navToggle.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      if (menuOpen) {
+        navMenu.classList.add('open');
+      } else {
+        navMenu.classList.remove('open');
+      }
+    });
+
+    // Close menu when link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuOpen = false;
+        navMenu.classList.remove('open');
+      });
+    });
+
     // Custom cursor
-const dot = document.getElementById('cursorDot');
-document.addEventListener('mousemove', (e) => {
-  dot.style.left = e.clientX + 'px';
-  dot.style.top = e.clientY + 'px';
-});
+    const dot = document.getElementById('cursorDot');
+    document.addEventListener('mousemove', (e) => {
+      dot.style.left = e.clientX + 'px';
+      dot.style.top = e.clientY + 'px';
+    });
 
-// Drag to scroll work section
-const workScroll = document.getElementById('workScroll');
-let isDown = false, startX, scrollLeft;
+    // Drag to scroll work section
+    const workScroll = document.getElementById('workScroll');
+    let isDown = false, startX, scrollLeft;
 
-workScroll.addEventListener('mousedown', (e) => {
-  isDown = true;
-  startX = e.pageX - workScroll.offsetLeft;
-  scrollLeft = workScroll.scrollLeft;
-});
-workScroll.addEventListener('mouseleave', () => isDown = false);
-workScroll.addEventListener('mouseup', () => isDown = false);
-workScroll.addEventListener('mousemove', (e) => {
-  if (!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - workScroll.offsetLeft;
-  workScroll.scrollLeft = scrollLeft - (x - startX) * 1.5;
-});
+    workScroll.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - workScroll.offsetLeft;
+      scrollLeft = workScroll.scrollLeft;
+    });
+    workScroll.addEventListener('mouseleave', () => isDown = false);
+    workScroll.addEventListener('mouseup', () => isDown = false);
+    workScroll.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - workScroll.offsetLeft;
+      workScroll.scrollLeft = scrollLeft - (x - startX) * 1.5;
+    });
+
+    // Click to italicize section titles
+    document.querySelectorAll('.section-title.clickable').forEach(title => {
+      title.addEventListener('click', function() {
+        this.classList.toggle('italic');
+      });
+    });
 
     // Smooth scroll untuk navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
