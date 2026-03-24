@@ -7,314 +7,7 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      overflow-x: hidden;
-      background: #000;
-    }
-
-    /* ===== HERO SECTION ===== */
-    .hero-container {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      align-items: flex-end;
-      justify-content: flex-start;
-    }
-
-    .hero-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('{{ url_for("static", filename="images/bergg.jpg") }}');
-      background-size: cover;
-      background-position: center;
-      filter: grayscale(100%) brightness(0.7);
-      z-index: 1;
-    }
-
-    /* ===== TOP NAVIGATION ===== */
-    .top-nav {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 2rem 3rem;
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(10px);
-    }
-
-    .nav-left {
-      display: flex;
-      gap: 3rem;
-      align-items: center;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 400;
-      letter-spacing: 0.05em;
-      transition: opacity 0.3s ease;
-      text-transform: uppercase;
-    }
-
-    .nav-links a:hover {
-      opacity: 0.7;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .news-ticker {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: #fff;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-    }
-
-    .news-label {
-      background: #ff6b6b;
-      padding: 0.3rem 0.8rem;
-      border-radius: 2px;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .news-text {
-      animation: slide 20s linear infinite;
-      white-space: nowrap;
-    }
-
-    @keyframes slide {
-      0% {
-        transform: translateX(100%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
-    }
-
-    /* ===== BRAND NAME (BOTTOM LEFT) ===== */
-    .brand-name {
-      position: absolute;
-      bottom: 3rem;
-      left: 3rem;
-      z-index: 50;
-      font-size: 8vw;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      animation: fadeInUp 1s ease-out;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* ===== CONTENT SECTIONS ===== */
-    .content-section {
-      min-height: 100vh;
-      padding: 6rem 3rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: #fff;
-      position: relative;
-      z-index: 10;
-    }
-
-    .content-section:nth-child(odd) {
-      background: #f5f5f5;
-    }
-
-    .section-title {
-      font-size: 3rem;
-      font-weight: 800;
-      margin-bottom: 2rem;
-      text-align: center;
-      color: #000;
-    }
-
-    .section-content {
-      max-width: 800px;
-      text-align: center;
-      color: #333;
-      line-height: 1.8;
-      font-size: 1.1rem;
-    }
-
-    /* ===== ABOUT SECTION ===== */
-    #about {
-      background: linear-gradient(135deg, #f5f5f5 0%, #fff 100%);
-    }
-
-    .about-text {
-      font-size: 1.3rem;
-      font-weight: 300;
-      max-width: 900px;
-      line-height: 1.9;
-      color: #222;
-    }
-
-    /* ===== WORK SECTION ===== */
-    #work {
-      background: #fff;
-    }
-
-    .work-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      width: 100%;
-      max-width: 1200px;
-    }
-
-    .work-card {
-      aspect-ratio: 1;
-      background: #f5f5f5;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-
-    .work-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    }
-
-    .work-card video,
-    .work-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* ===== CONTACT SECTION ===== */
-    #contact {
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-      color: #fff;
-    }
-
-    #contact .section-title {
-      color: #fff;
-    }
-
-    #contact .section-content {
-      color: #ddd;
-    }
-
-    .contact-links {
-      display: flex;
-      gap: 2rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 2rem;
-    }
-
-    .contact-link {
-      color: #fff;
-      text-decoration: none;
-      padding: 0.8rem 1.5rem;
-      border: 2px solid #fff;
-      border-radius: 4px;
-      transition: all 0.3s ease;
-      font-weight: 500;
-    }
-
-    .contact-link:hover {
-      background: #fff;
-      color: #1a1a1a;
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      background: #000;
-      color: #999;
-      padding: 3rem;
-      text-align: center;
-      border-top: 1px solid #333;
-    }
-
-    footer p {
-      margin: 0.5rem 0;
-      font-size: 0.9rem;
-    }
-
-    /* ===== RESPONSIVE ===== */
-    @media (max-width: 768px) {
-      .brand-name {
-        font-size: 12vw;
-        bottom: 2rem;
-        left: 2rem;
-      }
-
-      .top-nav {
-        padding: 1.5rem;
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .nav-left {
-        flex-direction: column;
-        gap: 1rem;
-        width: 100%;
-      }
-
-      .nav-links {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-
-      .section-title {
-        font-size: 2rem;
-      }
-
-      .content-section {
-        padding: 3rem 1.5rem;
-      }
-    }
-  </style>
+    
 </head>
 
 <body>
@@ -329,7 +22,7 @@
           <li><a href="#home">HOME</a></li>
           <li><a href="#work">WORK</a></li>
           <li><a href="#about">ABOUT</a></li>
-          <li><a href="#contact">CONTACT</a></li>
+          <li><a href="/dither">dither</a></li>
           <li><a href="#projects">START A PROJECT</a></li>
         </ul>
       </div>
@@ -355,9 +48,14 @@
   </section>
 
   <!-- ===== WORK SECTION ===== -->
-  <section class="content-section" id="work">
+<div class="cursor-dot" id="cursorDot"></div>
+
+<section class="content-section" id="work">
+  <div class="work-header">
     <h2 class="section-title">Work</h2>
-    <div class="work-grid">
+  </div>
+  <div class="work-scroll-wrapper" id="workScroll">
+    <div class="work-track">
       {% for v in videos %}
       <div class="work-card">
         <video autoplay muted loop playsinline preload="metadata">
@@ -366,7 +64,8 @@
       </div>
       {% endfor %}
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- ===== CONTACT SECTION ===== -->
   <section class="content-section" id="contact">
@@ -390,6 +89,31 @@
   </footer>
 
   <script>
+    // Custom cursor
+const dot = document.getElementById('cursorDot');
+document.addEventListener('mousemove', (e) => {
+  dot.style.left = e.clientX + 'px';
+  dot.style.top = e.clientY + 'px';
+});
+
+// Drag to scroll work section
+const workScroll = document.getElementById('workScroll');
+let isDown = false, startX, scrollLeft;
+
+workScroll.addEventListener('mousedown', (e) => {
+  isDown = true;
+  startX = e.pageX - workScroll.offsetLeft;
+  scrollLeft = workScroll.scrollLeft;
+});
+workScroll.addEventListener('mouseleave', () => isDown = false);
+workScroll.addEventListener('mouseup', () => isDown = false);
+workScroll.addEventListener('mousemove', (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - workScroll.offsetLeft;
+  workScroll.scrollLeft = scrollLeft - (x - startX) * 1.5;
+});
+
     // Smooth scroll untuk navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
