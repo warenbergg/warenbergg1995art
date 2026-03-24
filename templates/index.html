@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Randy1995 - Suprematic Design</title>
+  <title>warenbergg - Creative Design & Coding</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -18,6 +18,7 @@
     <!-- TOP NAVIGATION -->
     <nav class="top-nav">
       <div class="nav-left">
+        <div class="nav-logo">warenbergg</div>
         <ul class="nav-links">
           <li><a href="#home">HOME</a></li>
           <li><a href="#work">WORK</a></li>
@@ -28,15 +29,17 @@
     </nav>
 
     <!-- BRAND NAME -->
-    <h1 class="brand-name">SUPREMATIC</h1>
+    <h1 class="brand-name">warenbergg</h1>
   </section>
 
   <!-- ===== ABOUT SECTION ===== -->
   <section class="content-section" id="about">
-    <h2 class="section-title">About</h2>
-    <p class="about-text">
-      A human named RANDY ARDIANSYAH, the mind behind the verbal and visual. An art enthusiast exploring creative coding with purpose and designing with soul. Inspired by faith, space, and endless possibilities. A Muslim creative navigating the universe alongside AI.
-    </p>
+    <div class="section-wrapper">
+      <h2 class="section-title">About</h2>
+      <p class="about-text">
+        A human named RANDY ARDIANSYAH, the mind behind the verbal and visual. An art enthusiast exploring creative coding with purpose and designing with soul. Inspired by faith, space, and endless possibilities. A Muslim creative navigating the universe alongside AI.
+      </p>
+    </div>
   </section>
 
   <!-- ===== WORK SECTION ===== -->
@@ -45,6 +48,7 @@
 <section class="content-section" id="work">
   <div class="work-header">
     <h2 class="section-title">Work</h2>
+    <p class="section-description">Explore my creative projects and visual works. Each piece represents a journey of exploration, experimentation, and artistic expression through creative coding and visual design.</p>
   </div>
   <div class="work-scroll-wrapper" id="workScroll">
     <div class="work-track">
@@ -61,7 +65,10 @@
 
   <!-- ===== PROJECTS SECTION ===== -->
   <section class="content-section" id="projects">
-    <h2 class="section-title">Projects</h2>
+    <div class="section-wrapper">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-description">Discover my latest projects and collaborations. From research to creative coding, each project tells a unique story of innovation and artistic exploration.</p>
+    </div>
     <div class="projects-grid">
       <div class="project-card">
         <div class="card-background"></div>
@@ -146,6 +153,20 @@ workScroll.addEventListener('mousemove', (e) => {
       });
     }, { threshold: 0.1 });
     projectCards.forEach(card => observer.observe(card));
+
+    // Smooth scroll behavior
+    document.documentElement.style.scrollBehavior = 'smooth';
+
+    // Navbar scroll effect
+    const topNav = document.querySelector('.top-nav');
+    window.addEventListener('scroll', () => {
+      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      if (scrollTop > 100) {
+        topNav.classList.add('scrolled');
+      } else {
+        topNav.classList.remove('scrolled');
+      }
+    });
 
     // Duplicate isi track agar bisa infinite scroll effect (jika ada)
     const track = document.querySelector('.track');
