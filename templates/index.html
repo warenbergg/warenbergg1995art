@@ -40,21 +40,14 @@
       MAKE PEOPLE INTEREST WHAT I MADE FROM ART • CREATIVE • CODING • PROCESSING • PYHTON • AND EVERTHING IN BETWEEN
       </div>
   </div>
-  <!-- VISUAL BOARD SECTION -->
-  <section class="visual-board" id="work">
-    <div class="board-header">
-      <h2>Visual Board</h2>
-      <p>Creative Works & Explorations</p>
-    </div>
-    <div class="board-container">
+  <!-- VIDEO SLIDER GLASS EFFECT -->
+  <section class="scroll-gallery" id="work">
+    <div class="track">
       {% for v in videos %}
-      <div class="board-video-item">
-        <div class="video-wrapper">
-          <video autoplay muted loop playsinline preload="metadata">
-            <source src="{{ v }}" type="video/mp4">
-          </video>
-          <div class="video-overlay"></div>
-        </div>
+      <div class="card">
+        <video autoplay muted loop playsinline preload="metadata">
+          <source src="{{ v }}" type="video/mp4">
+        </video>               
       </div>
       {% endfor %}
     </div>
