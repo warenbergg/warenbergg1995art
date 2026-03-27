@@ -173,11 +173,12 @@ body {
 }
 
 .section-description {
-  font-size: 1.1rem;
-  color: #666;
+  font-size: 1.3rem;
+  color: #555;
   line-height: 1.8;
   margin-bottom: 3rem;
-  max-width: 600px;
+  max-width: 700px;
+  font-weight: 300;
 }
 
 .section-content {
@@ -194,12 +195,13 @@ body {
 }
 
 .about-text {
-  font-size: 1.2rem;
+  font-size: 2rem;
   font-weight: 300;
   max-width: 900px;
-  line-height: 1.9;
-  color: #333;
+  line-height: 1.8;
+  color: #000;
   text-align: left;
+  letter-spacing: -0.01em;
 }
 
 /* ===== WORK SECTION ===== */
