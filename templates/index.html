@@ -42,47 +42,21 @@
   </div>
   <!-- VISUAL BOARD SECTION -->
   <section class="visual-board" id="work">
+    <div class="board-header">
+      <h2>Visual Board</h2>
+      <p>Creative Works & Explorations</p>
+    </div>
     <div class="board-container">
-      <div class="board-item item-1">
-        <img src="{{ url_for('static', filename='images/project01.jpeg') }}" alt="Visual 1">
-        <span class="label">int.</span>
+      {% for v in videos %}
+      <div class="board-video-item">
+        <div class="video-wrapper">
+          <video autoplay muted loop playsinline preload="metadata">
+            <source src="{{ v }}" type="video/mp4">
+          </video>
+          <div class="video-overlay"></div>
+        </div>
       </div>
-      
-      <div class="board-item item-2">
-        <span class="label">→</span>
-      </div>
-      
-      <div class="board-center">
-        <h2>Visual<br><span class="arrow">[→]</span> Board</h2>
-      </div>
-      
-      <div class="board-item item-3">
-        <img src="{{ url_for('static', filename='images/project02.jpeg') }}" alt="Visual 2">
-        <span class="label">Taня<br>Богомолова</span>
-      </div>
-      
-      <div class="board-item item-4">
-        <img src="{{ url_for('static', filename='images/project03.jpeg') }}" alt="Visual 3">
-        <span class="label">#</span>
-      </div>
-      
-      <div class="board-item item-5">
-        <img src="{{ url_for('static', filename='images/project04.jpeg') }}" alt="Visual 4">
-        <span class="label">Iz chego<br>sostoit</span>
-      </div>
-      
-      <div class="board-item item-6">
-        <img src="{{ url_for('static', filename='images/randy.png') }}" alt="Visual 5">
-        <span class="label">Visual<br>Board</span>
-      </div>
-      
-      <div class="board-item item-7">
-        <span class="label">↗</span>
-      </div>
-      
-      <div class="board-item item-8">
-        <span class="label">↻</span>
-      </div>
+      {% endfor %}
     </div>
   </section>
   <section class="statement">
