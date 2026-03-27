@@ -3,216 +3,163 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>warenbergg - Creative Design & Coding</title>
+  <title>Randy1995</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    
 </head>
 
 <body>
-  <!-- ===== HERO SECTION ===== -->
-  <section class="hero-container">
-    <div class="hero-background"></div>
-
-    <!-- TOP NAVIGATION -->
-    <nav class="top-nav">
-      <div class="nav-left">
-        <div class="nav-logo" id="navToggle">warenbergg</div>
-        <ul class="nav-links" id="navMenu">
-          <li><a href="#home">HOME</a></li>
-          <li><a href="#work">WORK</a></li>
-          <li><a href="#about">ABOUT</a></li>
-          <li><a href="/dither">dither</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- BRAND NAME -->
-    <h1 class="brand-name">warenbergg</h1>
-  </section>
-
-  <!-- ===== ABOUT SECTION ===== -->
-  <section class="content-section" id="about">
-    <div class="section-wrapper">
-      <h2 class="section-title clickable">[ About ]</h2>
-      <p class="about-text">
-        A human named RANDY ARDIANSYAH, the mind behind the verbal and visual. An art enthusiast exploring creative coding with purpose and designing with soul. Inspired by faith, space, and endless possibilities. A Muslim creative navigating the universe alongside AI.
-      </p>
+  <nav class="navbar">
+    <div class="navbar-content">
+      <h2 class="logo">1995</h2>
+      <ul>
+        <li><a href="/">WarenBergg</a></li>
+        <li><a href="/dither">25Explorer</a></li>
+      </ul>
+      <button id="darkModeToggle" class="dark-btn">🌙</button>
     </div>
+  </nav>
+  <div class="container">
+  <header class="topbar">
+    <span></span>
+    <h1>1995 WarenBergg</h1>
+    <span></span>
+  </header>
+  <section class="desc" id="about">
+    <p class="left"></p>
+    <p class="center">
+      A human named RANDY ARDIANSYAH, the mind behind the verbal and visual. An art enthusiast exploring creative coding with purpose and designing with soul. 
+      Inspired by faith, space, and endless possibilities. A Muslim creative navigating the universe alongside AI.
+    </p>
+    <p class="right"></p>
   </section>
-
-  <!-- ===== WORK SECTION ===== -->
-<div class="cursor-dot" id="cursorDot"></div>
-
-<section class="content-section" id="work">
-  <div class="work-header">
-    <h2 class="section-title clickable">[ Work ]</h2>
-    <p class="section-description">Explore my creative projects and visual works. Each piece represents a journey of exploration, experimentation, and artistic expression through creative coding and visual design.</p>
+  <!-- TEKS BERJALAN -->
+  <div class="running-text">
+      <div class="marquee">
+      MAKE PEOPLE INTEREST WHAT I MADE FROM ART • CREATIVE • CODING • PROCESSING • PYHTON • AND EVERTHING IN BETWEEN
+      </div>
   </div>
-  <div class="work-scroll-wrapper" id="workScroll">
-    <div class="work-track">
+  <!-- VIDEO SLIDER GLASS EFFECT -->
+  <section class="scroll-gallery" id="work">
+    <div class="track">
       {% for v in videos %}
-      <div class="work-card">
+      <div class="card">
         <video autoplay muted loop playsinline preload="metadata">
           <source src="{{ v }}" type="video/mp4">
-        </video>
+        </video>               
       </div>
       {% endfor %}
     </div>
-  </div>
-</section>
-
-  <!-- ===== PROJECTS SECTION ===== -->
-  <section class="content-section" id="projects">
-    <div class="section-wrapper">
-      <h2 class="section-title clickable">[ Projects ]</h2>
-      <p class="section-description">Discover my latest projects and collaborations. From research to creative coding, each project tells a unique story of innovation and artistic exploration.</p>
-    </div>
-    <div class="projects-grid">
-      <div class="project-card">
-        <div class="card-background"></div>
-        <div class="card-content">
-          <h3>Project Tesis</h3>
-          <p>EndOfYear 2024 - Explore my research and creative exploration on Google Colab</p>
-          <a href="https://colab.research.google.com/drive/1TpDNeSrHazXwYj8acuhk3JMOpUKoDRtb?usp=sharing" class="card-button" target="_blank">Visit Project</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="card-background"></div>
-        <div class="card-content">
-          <h3>Visual Archive</h3>
-          <p>MiddleOfYear 2025 - Discover more visual works and creative explorations</p>
-          <a href="https://scrapbox.io/WarenBergg1995/" class="card-button" target="_blank">Visit Scrapbox</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="card-background"></div>
-        <div class="card-content">
-          <h3>Follow Me</h3>
-          <p>Stay updated with my latest works and creative journey on social media</p>
-          <a href="https://x.com/warenbergg1995" class="card-button" target="_blank">Follow on X</a>
-        </div>
-      </div>
-    </div>
   </section>
-
-
-
-  <!-- ===== FOOTER ===== -->
-  <footer>
-    <p><strong>© 2025 Randy Ardiansyah</strong></p>
-    <p>Coding • Visual • Art • Creative Direction</p>
-    <p style="margin-top: 1rem; font-size: 0.8rem;">Designed with passion and creativity</p>
-  </footer>
-
-  <script>
-    // Mobile menu toggle
-    const navToggle = document.getElementById('navToggle');
-    const navMenu = document.getElementById('navMenu');
-    let menuOpen = false;
-
-    navToggle.addEventListener('click', () => {
-      menuOpen = !menuOpen;
-      if (menuOpen) {
-        navMenu.classList.add('open');
+  <section class="statement">
+    <h1>
+      Good design is a conversation
+      <span class="inline-img">
+        <img src="{{ url_for('static', filename='images/iconXX.png') }}" alt="">
+      </span>
+      between intention and emotion
+    </h1>
+  </section>
+  
+  
+  <!-- BIG LINK HEADING -->
+  <div class="big-link-container">
+  
+    <a href="https://colab.research.google.com/drive/1TpDNeSrHazXwYj8acuhk3JMOpUKoDRtb?usp=sharing" class="big-link-item">
+      <div class="content-left">
+        <h2>Project Tesis<br><span class="outline">EndOfYear 2024</span></h2>
+        <div class="arrow-btn">↗</div>
+      </div>
+      <div class="content-right">
+        <img src="{{ url_for('static', filename='images/conan.png') }}" alt="Works">
+      </div>
+    </a>
+    <a href="https://scrapbox.io/WarenBergg1995/" target="_blank" class="big-link-item">
+      <div class="content-left">
+        <h2>MORE VISUAL<br><span class="outline">MiddleOfYear 2025</span></h2>
+        <div class="arrow-btn">↗</div>
+      </div>
+      <div class="content-right">
+        <img src="{{ url_for('static', filename='images/bergg.jpg') }}" alt="Manifesto">
+      </div>
+    </a>
+  
+    <a href="#" class="big-link-item">
+      <div class="content-left">
+        <h2>COMING SOON<br><span class="outline">FLOW IN THE AIR</span></h2>
+        <div class="arrow-btn">↗</div>
+      </div>
+      <div class="content-right">
+        <img src="{{ url_for('static', filename='images/mori.png') }}" alt="Contact">
+      </div>
+    </a>
+  
+  </div>
+<!-- ====== FOOTER / FOOTBAR ====== -->
+<footer class="footbar">
+  <div class="footer-content">
+    <p class="title">1995</p>
+    <p class="subtitle"> Coding • Visual • Art</p>
+    <div class="social-links">
+      <a href="#" target="_blank">Instagram</a>
+      <a href="https://github.com/warenbergg" target="_blank">Github</a>
+      <a href="https://scrapbox.io/WarenBergg1995/" target="_blank">scrapbox.io</a>
+      <a href="https://x.com/warenbergg1995" target="_blank">X</a>
+    </div>
+    <p class="copyright">© 2025 warenbergg1995. All Rights Reserved.</p>
+  </div>
+</footer>
+<!-- ================= JS FIXED DI BAWAH ================= -->
+<script>
+  window.addEventListener("scroll", () => {
+  document.querySelectorAll(".reveal").forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight - 50) el.classList.add("active");
+  });
+});
+  // Duplicate isi track agar bisa infinite scroll effect
+  const track = document.querySelector('.track');
+  track.innerHTML += track.innerHTML;
+  /* === DARK MODE === */
+  const toggle = document.getElementById("darkModeToggle");
+  
+  // load state dari localStorage
+  if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-mode");
+      toggle.textContent = "☀️";
+  }
+  
+  // toggle dark mode
+  toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+  
+      if (document.body.classList.contains("dark-mode")) {
+          localStorage.setItem("theme", "dark");
+          toggle.textContent = "☀️";
       } else {
-        navMenu.classList.remove('open');
+          localStorage.setItem("theme", "light");
+          toggle.textContent = "🌙";
       }
-    });
-
-    // Close menu when link is clicked
-    document.querySelectorAll('.nav-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        menuOpen = false;
-        navMenu.classList.remove('open');
-      });
-    });
-
-    // Custom cursor
-    const dot = document.getElementById('cursorDot');
-    document.addEventListener('mousemove', (e) => {
-      dot.style.left = e.clientX + 'px';
-      dot.style.top = e.clientY + 'px';
-    });
-
-    // Drag to scroll work section
-    const workScroll = document.getElementById('workScroll');
-    let isDown = false, startX, scrollLeft;
-
-    workScroll.addEventListener('mousedown', (e) => {
-      isDown = true;
-      startX = e.pageX - workScroll.offsetLeft;
-      scrollLeft = workScroll.scrollLeft;
-    });
-    workScroll.addEventListener('mouseleave', () => isDown = false);
-    workScroll.addEventListener('mouseup', () => isDown = false);
-    workScroll.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - workScroll.offsetLeft;
-      workScroll.scrollLeft = scrollLeft - (x - startX) * 1.5;
-    });
-
-    // Click to italicize section titles
-    document.querySelectorAll('.section-title.clickable').forEach(title => {
-      title.addEventListener('click', function() {
-        this.classList.toggle('italic');
-      });
-    });
-
-    // Smooth scroll untuk navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
-
-    // Animate project cards on scroll
-    const projectCards = document.querySelectorAll('.project-card');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-    projectCards.forEach(card => observer.observe(card));
-
-    // Smooth scroll behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
-
-    // Navbar scroll effect
-    const topNav = document.querySelector('.top-nav');
-    window.addEventListener('scroll', () => {
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      if (scrollTop > 100) {
-        topNav.classList.add('scrolled');
-      } else {
-        topNav.classList.remove('scrolled');
-      }
-    });
-
-    // Duplicate isi track agar bisa infinite scroll effect (jika ada)
-    const track = document.querySelector('.track');
-    if (track) {
-      track.innerHTML += track.innerHTML;
-    }
-
-    // Scroll reveal animation
-    window.addEventListener("scroll", () => {
-      document.querySelectorAll(".reveal").forEach(el => {
-        const top = el.getBoundingClientRect().top;
-        if (top < window.innerHeight - 50) el.classList.add("active");
-      });
-    });
+  });
+  
+  /* === PARALLAX MOUSE UNTUK VIDEO SLIDER PERTAMA SAJA === */
+  const firstVideo = document.querySelector('.track video');
+  
+  document.addEventListener('mousemove', (e) => {
+      if (!firstVideo) return;
+      let x = (e.clientX / window.innerWidth - 0.5) * 10; /* 10 = lebih halus */
+      let y = (e.clientY / window.innerHeight - 0.5) * 10;
+      firstVideo.style.transform = `translate(${x}px, ${y}px)`;
+  });
+  const statement = document.querySelector('.statement');
+window.addEventListener('scroll', () => {
+  const top = statement.getBoundingClientRect().top;
+  if (top < window.innerHeight * 0.8) {
+    statement.classList.add('show');
+  }
+});
   </script>
-
+  
 </body>
 </html>
