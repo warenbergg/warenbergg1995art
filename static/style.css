@@ -218,6 +218,143 @@ body.dark-mode .navbar {
 }
 
 
+/* ========== VISUAL BOARD SECTION ========== */
+.visual-board {
+  width: 100%;
+  padding: 80px 24px;
+  background: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  height: 600px;
+  background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+  border-radius: 20px;
+  padding: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 20px;
+  align-items: center;
+  justify-items: center;
+}
+
+.board-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.board-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.board-item:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.board-item .label {
+  position: absolute;
+  bottom: -30px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #666;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.item-1 {
+  grid-column: 1;
+  grid-row: 1;
+  width: 120px;
+  height: 120px;
+}
+
+.item-2 {
+  grid-column: 2;
+  grid-row: 1;
+  font-size: 24px;
+  color: #000;
+}
+
+.board-center {
+  grid-column: 2 / 4;
+  grid-row: 2;
+  text-align: center;
+  z-index: 10;
+}
+
+.board-center h2 {
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1.1;
+  color: #000;
+  letter-spacing: -2px;
+}
+
+.board-center .arrow {
+  font-size: 48px;
+  font-weight: 700;
+  margin: 0 8px;
+}
+
+.item-3 {
+  grid-column: 4;
+  grid-row: 1;
+  width: 100px;
+  height: 100px;
+}
+
+.item-4 {
+  grid-column: 1;
+  grid-row: 3;
+  width: 110px;
+  height: 110px;
+}
+
+.item-5 {
+  grid-column: 2;
+  grid-row: 3;
+  width: 100px;
+  height: 100px;
+}
+
+.item-6 {
+  grid-column: 3;
+  grid-row: 3;
+  width: 100px;
+  height: 100px;
+}
+
+.item-7 {
+  grid-column: 4;
+  grid-row: 2;
+  font-size: 20px;
+  color: #000;
+}
+
+.item-8 {
+  grid-column: 4;
+  grid-row: 3;
+  font-size: 20px;
+  color: #000;
+}
+
 /* ========== PROFILE SECTION ========== */
 .profile {
   margin-top: 100px;
