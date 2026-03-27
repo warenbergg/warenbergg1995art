@@ -120,8 +120,14 @@ body {
 .portfolio-container {
   max-width: 1400px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.portfolio-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 16px;
 }
 
@@ -140,6 +146,33 @@ body {
 }
 
 .portfolio-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.portfolio-images {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.image-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  aspect-ratio: 4 / 5;
+  background: #1a1a1a;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.image-item:hover {
+  transform: scale(1.02);
+}
+
+.image-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -234,23 +267,23 @@ body {
 }
 
 .about-left h2 {
-  font-size: 48px;
-  font-weight: 900;
-  margin-bottom: 24px;
-  letter-spacing: -1px;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
 }
 
 .about-left p {
-  font-size: 16px;
-  line-height: 1.8;
-  color: #ccc;
-  margin-bottom: 32px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #aaa;
+  margin-bottom: 24px;
 }
 
 .about-links p {
-  font-size: 14px;
-  margin-bottom: 12px;
-  color: #999;
+  font-size: 12px;
+  margin-bottom: 8px;
+  color: #888;
 }
 
 .about-links p strong {
@@ -259,24 +292,25 @@ body {
 }
 
 .about-right h3 {
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 700;
-  margin-bottom: 24px;
-  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
   text-transform: uppercase;
+  color: #999;
 }
 
 .about-right ul {
   list-style: none;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px 32px;
+  gap: 12px 24px;
 }
 
 .about-right li {
-  font-size: 14px;
-  color: #999;
-  line-height: 1.6;
+  font-size: 12px;
+  color: #888;
+  line-height: 1.5;
 }
 
 /* ========== FOOTER ========== */

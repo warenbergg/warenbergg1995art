@@ -16,9 +16,9 @@
       <h2 class="logo">warenbergg</h2>
       <ul class="nav-main">
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#theory">Theory</a></li>
+        <li><a href="/theory">Theory</a></li>
         <li><a href="#casestudies">CaseStudies</a></li>
-        <li><a href="#about">about</a></li>
+        <li><a href="/dither">dither</a></li>
       </ul>
       <ul class="nav-secondary">
         <li><a href="#">MonoTool ↗</a></li>
@@ -39,35 +39,25 @@
   <!-- PORTFOLIO GRID -->
   <section class="portfolio-grid">
     <div class="portfolio-container">
-      {% for v in videos %}
-      <div class="portfolio-item">
-        <video autoplay muted loop playsinline preload="metadata">
-          <source src="{{ v }}" type="video/mp4">
-        </video>
+      <div class="portfolio-row">
+        {% for v in videos %}
+        <div class="portfolio-item">
+          <video autoplay muted loop playsinline preload="metadata">
+            <source src="{{ v }}" type="video/mp4">
+          </video>
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
-    </div>
-  </section>
-
-  <!-- THEORY SECTION -->
-  <section class="theory-section" id="theory">
-    <div class="theory-container">
-      <h2>Theory</h2>
-      <div class="theory-grid">
-        <a href="https://colab.research.google.com/drive/1TpDNeSrHazXwYj8acuhk3JMOpUKoDRtb?usp=sharing" class="theory-card">
-          <div class="theory-image">
-            <img src="{{ url_for('static', filename='images/conan.png') }}" alt="Project Tesis">
-          </div>
-          <h3>Project Tesis</h3>
-          <p>EndOfYear 2024</p>
-        </a>
-        <a href="https://scrapbox.io/WarenBergg1995/" target="_blank" class="theory-card">
-          <div class="theory-image">
-            <img src="{{ url_for('static', filename='images/bergg.jpg') }}" alt="More Visual">
-          </div>
-          <h3>More Visual</h3>
-          <p>MiddleOfYear 2025</p>
-        </a>
+      <div class="portfolio-images">
+        <div class="image-item">
+          <img src="{{ url_for('static', filename='images/conan.png') }}" alt="Work 1">
+        </div>
+        <div class="image-item">
+          <img src="{{ url_for('static', filename='images/bergg.jpg') }}" alt="Work 2">
+        </div>
+        <div class="image-item">
+          <img src="{{ url_for('static', filename='images/mori.png') }}" alt="Work 3">
+        </div>
       </div>
     </div>
   </section>
@@ -78,8 +68,7 @@
       <div class="about-left">
         <h2>Hello!</h2>
         <p>
-          A human named RANDY ARDIANSYAH, the mind behind the verbal and visual. An art enthusiast exploring creative coding with purpose and designing with soul. 
-          Inspired by faith, space, and endless possibilities. A Muslim creative navigating the universe alongside AI.
+          A human named RANDY ARDIANSYAH, the mind behind the verbal and visual. An art enthusiast exploring creative coding with purpose and designing with soul. Inspired by faith, space, and endless possibilities. A Muslim creative navigating the universe alongside AI.
         </p>
         <div class="about-links">
           <p><strong>Instagram</strong></p>

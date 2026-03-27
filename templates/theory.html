@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Theory - Randy1995</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="navbar-content">
+      <h2 class="logo">warenbergg</h2>
+      <ul class="nav-main">
+        <li><a href="/">Projects</a></li>
+        <li><a href="/theory">Theory</a></li>
+        <li><a href="#casestudies">CaseStudies</a></li>
+        <li><a href="/dither">dither</a></li>
+      </ul>
+      <ul class="nav-secondary">
+        <li><a href="#">MonoTool ↗</a></li>
+        <li><a href="#">MonoModular Typefaces ↗</a></li>
+        <li><a href="#">Websites</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- THEORY SECTION -->
+  <section class="theory-section theory-page">
+    <div class="theory-container">
+      <h2>Theory</h2>
+      <div class="theory-grid">
+        <a href="https://colab.research.google.com/drive/1TpDNeSrHazXwYj8acuhk3JMOpUKoDRtb?usp=sharing" class="theory-card">
+          <div class="theory-image">
+            <img src="{{ url_for('static', filename='images/conan.png') }}" alt="Project Tesis">
+          </div>
+          <h3>Project Tesis</h3>
+          <p>EndOfYear 2024</p>
+        </a>
+        <a href="https://scrapbox.io/WarenBergg1995/" target="_blank" class="theory-card">
+          <div class="theory-image">
+            <img src="{{ url_for('static', filename='images/bergg.jpg') }}" alt="More Visual">
+          </div>
+          <h3>More Visual</h3>
+          <p>MiddleOfYear 2025</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footbar">
+    <div class="footer-content">
+      <p class="copyright">© 2025 warenbergg1995. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  </script>
+  
+</body>
+</html>
