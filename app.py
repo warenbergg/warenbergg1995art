@@ -21,7 +21,12 @@ def home():
 def about():
     return render_template("about.html")
 
-# NEW ROUTE
+# THEORY ROUTE
+@app.route("/theory")
+def theory():
+    return render_template("theory.html")
+
+# DITHER ROUTE
 @app.route("/dither")
 def dither():
     return render_template("dither.html")
