@@ -471,3 +471,39 @@ body.dark-mode .copyright {
     margin-bottom: 40px;
   }
 }
+/* ========== HAMBURGER BUTTON ========== */
+.menu-toggle {
+  display: none;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ========== MOBILE NAV FIX ========== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-main {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: inherit;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 24px;
+    gap: 12px;
+
+    /* hidden by default */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .nav-main.active {
+    max-height: 300px;
+  }
+}

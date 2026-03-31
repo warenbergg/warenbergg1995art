@@ -12,9 +12,11 @@
 
 <body>
   <!-- NAVBAR -->
+
   <nav class="navbar">
     <div class="navbar-content">
-      <h2 class="logo">warenbergg</h2>
+       <h2 class="logo">warenbergg</h2>
+      <button class="menu-toggle" id="menu-toggle">☰</button>
       <ul class="nav-main">
         <li><a href="#projects">1995</a></li>
         <li><a href="/theory">Theory</a></li>
@@ -102,6 +104,14 @@
         navbar.classList.remove('scrolled');
       }
     });
+    const toggle = document.getElementById("menu-toggle");
+  const nav = document.querySelector(".nav-main");
+
+  toggle.addEventListener("click", () => {
+  nav.classList.toggle("active");
+  toggle.classList.toggle("active");
+});
+
   </script>
   
 </body>
