@@ -44,38 +44,34 @@ body.dark-mode .navbar {
 
 .navbar .logo {
   font-weight: 700;
-  font-size: 15px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+  min-width: 80px;
+  font-family: 'Poppins', sans-serif;
 }
 
-.navbar ul {
+.nav-main {
   display: flex;
-  gap: 16px;
+  gap: 32px;
   list-style: none;
+  flex: 1;
+  justify-content: center;
 }
 
 .navbar a {
   text-decoration: none;
-  color: inherit;
-  font-size: 14px;
+  color: #000;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
   transition: opacity 0.3s ease;
+  text-transform: capitalize;
+  font-family: 'Poppins', sans-serif;
 }
 
 .navbar a:hover {
   opacity: 0.6;
-}
-
-.dark-btn {
-  background: transparent;
-  border: 2px solid currentColor;
-  border-radius: 50px;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: 0.3s ease;
-}
-
-.dark-btn:hover {
-  opacity: 0.7;
 }
 
 /* Container */
@@ -89,17 +85,25 @@ body.dark-mode .navbar {
 .header {
   text-align: center;
   margin-bottom: 48px;
+  padding-top: 40px;
 }
 
-.header-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 32px;
+.dither-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
 
+.dither-header p {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  font-weight: 400;
+  max-width: 700px;
+  margin: 0 auto;
+  color: #333;
+  line-height: 1.8;
 }
 
 .header h1 {
@@ -108,11 +112,10 @@ body.dark-mode .navbar {
   line-height: 0.9;
 }
 
-
 .header p {
   font-size: 13px;
   max-width: 500px;
-  margin: 0 auto; 
+  margin: 0 auto;
   text-align: center;
 }
 

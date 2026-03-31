@@ -6,6 +6,7 @@
   <title>Theory - Randy1995</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
@@ -20,32 +21,36 @@
         <li><a href="#casestudies">CaseStudies</a></li>
         <li><a href="/dither">dither</a></li>
       </ul>
-
     </div>
   </nav>
 
-  <!-- THEORY SECTION -->
-  <section class="theory-section theory-page">
-    <div class="theory-container">
-      <h2>Theory</h2>
-      <div class="theory-grid">
-        <a href="https://colab.research.google.com/drive/1TpDNeSrHazXwYj8acuhk3JMOpUKoDRtb?usp=sharing" class="theory-card">
-          <div class="theory-image">
-            <img src="{{ url_for('static', filename='images/conan.png') }}" alt="Project Tesis">
-          </div>
-          <h3>Project Tesis</h3>
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+    <!-- THEORY HEADER -->
+    <section class="section theory-header">
+      <h1>Theory</h1>
+      <p>Research & Exploration in Creative Practice</p>
+    </section>
+
+    <!-- THEORY ITEMS -->
+    <section class="theory-items">
+      <div class="theory-item">
+        <a href="https://colab.research.google.com/drive/1TpDNeSrHazXwYj8acuhk3JMOpUKoDRtb?usp=sharing" target="_blank">
+          <h2>Project Tesis</h2>
           <p>EndOfYear 2024</p>
-        </a>
-        <a href="https://scrapbox.io/WarenBergg1995/" target="_blank" class="theory-card">
-          <div class="theory-image">
-            <img src="{{ url_for('static', filename='images/bergg.jpg') }}" alt="More Visual">
-          </div>
-          <h3>More Visual</h3>
-          <p>MiddleOfYear 2025</p>
+          <p class="description">Research on creative coding and visual systems</p>
         </a>
       </div>
-    </div>
-  </section>
+
+      <div class="theory-item">
+        <a href="https://scrapbox.io/WarenBergg1995/" target="_blank">
+          <h2>More Visual</h2>
+          <p>MiddleOfYear 2025</p>
+          <p class="description">Visual explorations and design documentation</p>
+        </a>
+      </div>
+    </section>
+  </main>
 
   <!-- FOOTER -->
   <footer class="footbar">

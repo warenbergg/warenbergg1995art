@@ -212,6 +212,59 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+/* ========== THEORY PAGE ========== */
+.theory-header h1 {
+  font-size: 56px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.theory-header p {
+  font-size: 18px;
+  color: #666;
+  font-weight: 400;
+}
+
+.theory-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 60px;
+  margin-top: 80px;
+}
+
+.theory-item {
+  text-align: center;
+}
+
+.theory-item a {
+  text-decoration: none;
+  color: #000;
+  transition: opacity 0.3s ease;
+  display: block;
+}
+
+.theory-item a:hover {
+  opacity: 0.6;
+}
+
+.theory-item h2 {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.theory-item p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.theory-item .description {
+  font-size: 14px;
+  color: #888;
+  margin-top: 12px;
+}
+
 /* ========== RESPONSIVE ========== */
 @media (max-width: 1024px) {
   .navbar-content {
