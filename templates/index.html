@@ -12,11 +12,9 @@
 
 <body>
   <!-- NAVBAR -->
-
   <nav class="navbar">
-    <div class="nav-overlay" id="nav-overlay"></div>
     <div class="navbar-content">
-       <h2 class="logo">warenbergg</h2>
+      <h2 class="logo">warenbergg</h2>
       <button class="menu-toggle" id="menu-toggle">☰</button>
       <ul class="nav-main">
         <li><a href="#projects">1995</a></li>
@@ -26,6 +24,10 @@
       </ul>
     </div>
   </nav>
+  
+  <!-- PINDAH KE SINI -->
+  <div class="nav-overlay" id="nav-overlay"></div>
+  
 
   <!-- MAIN CONTENT -->
   <main class="main-content">
@@ -49,7 +51,7 @@
     <!-- CONTACT SECTION -->
     <section class="section contact-section">
       <h3>Contact</h3>
-      <p>Inquiries: <a href="mailto:hello@warenbergg.com">warenbergg99@gmail.com/a></p>
+      <p>Inquiries: <a href="mailto:warenbergg99@gmail.com">warenbergg99@gmail.com</a></p>
       <p>Instagram: <a href="https://instagram.com/warenbergg1995" target="_blank">@warenbergg1995</a></p>
       <p>LinkedIn: <a href="https://linkedin.com/in/randy-ardiansyah" target="_blank">in/randyardiansyah</a></p>
       <p>More Info: <a href="https://scrapbox.io/WarenBergg1995/" target="_blank">warenbergg.creative</a></p>
@@ -119,10 +121,11 @@
 
   // klik overlay = tutup
   overlay.addEventListener("click", () => {
-    nav.classList.remove("active");
-    overlay.classList.remove("active");
-    toggle.classList.remove("active");
-  });
+  nav.classList.remove("active");
+  overlay.classList.remove("active");
+  toggle.classList.remove("active");
+  document.body.classList.remove("no-scroll");
+});
 
   // klik menu = auto close
   links.forEach(link => {
@@ -130,8 +133,17 @@
       nav.classList.remove("active");
       overlay.classList.remove("active");
       toggle.classList.remove("active");
-    });
+    document.body.classList.remove("no-scroll");
   });
+});
+  toggle.addEventListener("click", () => {
+  nav.classList.toggle("active");
+  overlay.classList.toggle("active");
+  toggle.classList.toggle("active");
+
+  document.body.classList.toggle("no-scroll");
+});
+
 
   </script>
   

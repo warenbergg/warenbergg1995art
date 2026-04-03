@@ -616,7 +616,7 @@ function processImage() {
 
   ctx.putImageData(img, 0, 0);
 }
-const toggle = document.getElementById("menu-toggle");
+  const toggle = document.getElementById("menu-toggle");
   const nav = document.querySelector(".nav-main");
   const overlay = document.getElementById("nav-overlay");
   const links = document.querySelectorAll(".nav-main a");
