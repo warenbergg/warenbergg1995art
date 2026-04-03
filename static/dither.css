@@ -13,7 +13,8 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-body.dark-mode {
+/* ========== DARK MODE ========== */
+.dark-mode {
   background: #0a0a0a;
   color: #e9e9e9;
 }
@@ -28,11 +29,39 @@ body.dark-mode {
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
 }
+body.dark-mode .slider-container input[type="range"]::-moz-range-track {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .slider-container input[type="range"]::-moz-range-thumb {
+  background: #e9e9e9;
+  border-color: #e9e9e9;
+}
+
+body.dark-mode .bit-group select {
+  border-color: rgba(255,255,255,0.2);
+  color: #fff;
+  background: transparent;
+}
 
 body.dark-mode .navbar {
   background: rgba(10, 10, 10, 0.8);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+
+/* ===== TAMBAHKAN INI ===== */
+body.dark-mode .navbar a {
+  color: #fff;
+}
+
+body.dark-mode .navbar .logo {
+  color: #fff;
+}
+
+body.dark-mode .dark-btn {
+  color: #fff;
+}
+/* ======================== */
 
 .navbar-content {
   max-width: 1200px;
@@ -75,6 +104,33 @@ body.dark-mode .navbar {
   opacity: 0.6;
 }
 
+/* ===== DARK BUTTON ===== */
+.dark-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 8px 12px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  color: #000;
+}
+
+.dark-btn:hover {
+  transform: scale(1.1);
+  opacity: 0.7;
+}
+
+body.dark-mode .dark-btn {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .dark-btn {
+    order: 1;
+    margin-left: auto;
+  }
+}
 /* Container */
 .container {
   max-width: 1200px;
@@ -673,9 +729,6 @@ body.dark-mode .info-body p {
   display: none !important;
 }
 
-* {
-  transition: all 0.6s cubic-bezier(.16,1,.3,1);
-}
 
 /* Warna input color agar selaras */
 input[type="color"] {
@@ -802,4 +855,21 @@ input[type="color"] {
     display: block;
     width: 100%;
   }
+}
+
+/* tamabhan button dowload */
+#downloadImgBtn {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+#downloadImgBtn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode #downloadImgBtn {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode #downloadImgBtn:hover {
+  background: rgba(255, 255, 255, 0.1);
 }

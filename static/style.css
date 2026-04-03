@@ -40,6 +40,25 @@ body.dark-mode .navbar {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* ===== TAMBAHKAN INI ===== */
+body.dark-mode .navbar a {
+  color: #fff;
+}
+
+body.dark-mode .navbar .logo {
+  color: #fff;
+}
+
+body.dark-mode .dark-btn {
+  color: #fff;
+}
+/* ======================== */
+
+body.dark-mode .navbar {
+  background: rgba(10, 10, 10, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .navbar-content {
   max-width: 1200px;
   margin: 0 auto;
@@ -81,18 +100,27 @@ body.dark-mode .navbar {
   opacity: 0.6;
 }
 
-/* ========== DARK MODE TOGGLE BUTTON ========== */
 .dark-btn {
   background: transparent;
-  border: 2px solid currentColor;
-  border-radius: 50px;
-  padding: 8px 12px;
+  border: none;
   cursor: pointer;
   font-size: 18px;
-  transition: 0.3s ease;
+  padding: 8px 12px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   font-family: 'Poppins', sans-serif;
 }
 
+.dark-btn:hover {
+  transform: scale(1.1);
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .dark-btn {
+    order: 1;
+    margin-left: auto;
+  }
+}
 .dark-btn:hover {
   opacity: 0.7;
 }
@@ -550,3 +578,5 @@ body.dark-mode .copyright {
   transform: translateX(6px);
   opacity: 0.6;
 }
+
+

@@ -1,19 +1,4 @@
-/* =========================
-   DARK MODE
-========================= */
-const toggle = document.getElementById("darkModeToggle");
 
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark-mode");
-  toggle.textContent = "☀️";
-}
-
-toggle.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
-  const isDark = document.body.classList.contains("dark-mode");
-  localStorage.setItem("theme", isDark ? "dark" : "light");
-  toggle.textContent = isDark ? "☀️" : "🌙";
-});
 
 /* =========================
    GLOBAL STATE
@@ -293,15 +278,28 @@ function snapThreshold(v) {
   );
 }
 
+// BARU (lebih aman):
+let snapTimeout;
 ["mouseup", "touchend"].forEach(evt => {
   thresholdSlider.addEventListener(evt, () => {
-    const snapped = snapThreshold(parseInt(thresholdSlider.value));
-    thresholdSlider.value = snapped;
-    thresholdValue.textContent = snapped;
-    processImage();
+    clearTimeout(snapTimeout);
+    snapTimeout = setTimeout(() => {
+      const snapped = snapThreshold(parseInt(thresholdSlider.value));
+      thresholdSlider.value = snapped;
+      thresholdValue.textContent = snapped;
+      processImage();
+    }, 100);
   });
 });
 
+// Tambahkan reset function
+function clearImage() {
+  originalImage = null;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  uploadPlaceholder.classList.remove("hidden");
+  canvas.classList.remove("active");
+  saveBtn.disabled = true;
+}
 /* =========================
    EVENTS
 ========================= */
@@ -309,9 +307,28 @@ fileInput.addEventListener("change", (e) => {
   const file = e.target.files[0];
   if (!file) return;
 
+  // ✅ Validasi ukuran (max 5MB)
+  if (file.size > 5 * 1024 * 1024) {
+    alert("File terlalu besar (max 5MB)");
+    return;
+  }
+
+  // ✅ Validasi format
+  if (!file.type.startsWith("image/")) {
+    alert("File harus gambar");
+    return;
+  }
+
   const reader = new FileReader();
+  reader.onerror = () => {
+    alert("Gagal membaca file");
+  };
+  
   reader.onload = (ev) => {
     const img = new Image();
+    img.onerror = () => {
+      alert("Gagal load gambar");
+    };
     img.onload = () => {
       originalImage = img;
       uploadPlaceholder.classList.add("hidden");
@@ -346,7 +363,41 @@ document.getElementById("exportStill").addEventListener("click", () => {
 document.getElementById("closeStill").addEventListener("click", () => {
   stillModal.classList.add("hidden");
 });
+/* =========================
+   DOWNLOAD IMAGE ONLY
+========================= */
+const downloadImgBtn = document.getElementById("downloadImgBtn");
 
+downloadImgBtn.addEventListener("click", () => {
+  if (!originalImage) return;
+
+  // Create link dan download langsung dari canvas
+  const link = document.createElement("a");
+  link.download = `dither-${currentStyle}-${bitDepthSelect.value}bit.png`;
+  link.href = canvas.toDataURL("image/png");
+  link.click();
+});
+
+// Enable button saat gambar sudah di-upload
+fileInput.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    const img = new Image();
+    img.onload = () => {
+      originalImage = img;
+      uploadPlaceholder.classList.add("hidden");
+      canvas.classList.add("active");
+      saveBtn.disabled = false;
+      downloadImgBtn.disabled = false; // ✅ ENABLE DOWNLOAD BUTTON
+      processImage();
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+});
 
 /* =========================
    STILL CANVAS (EXPORT ONLY)
@@ -628,13 +679,6 @@ function processImage() {
     toggle.classList.toggle("active");
   });
 
-  // klik overlay = tutup
-  overlay.addEventListener("click", () => {
-    nav.classList.remove("active");
-    overlay.classList.remove("active");
-    toggle.classList.remove("active");
-  });
-
   // klik menu = auto close
   links.forEach(link => {
     link.addEventListener("click", () => {
@@ -643,3 +687,35 @@ function processImage() {
       toggle.classList.remove("active");
     });
   });
+
+
+// Cek localStorage saat loading
+if (localStorage.getItem('dark-mode') === 'enabled') {
+  document.body.classList.add('dark-mode');
+  darkToggle.textContent = '☀️';
+}
+
+const darkToggle = document.getElementById('dark-toggle');
+
+if (localStorage.getItem('dark-mode') === 'enabled') {
+  document.body.classList.add('dark-mode');
+  if (darkToggle) darkToggle.textContent = '☀️';
+}
+
+if (darkToggle) {
+  darkToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    
+    try { // ✅ TAMBAH ERROR HANDLING
+      if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('dark-mode', 'enabled');
+        darkToggle.textContent = '☀️';
+      } else {
+        localStorage.setItem('dark-mode', 'disabled');
+        darkToggle.textContent = '🌙';
+      }
+    } catch (e) {
+      console.warn("localStorage full or disabled");
+    }
+  });
+}
