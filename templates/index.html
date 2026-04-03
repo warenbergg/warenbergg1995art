@@ -13,6 +13,7 @@
 <body>
   <!-- NAVBAR -->
   <nav class="navbar">
+    <div class="nav-overlay" id="nav-overlay">  </div>
     <div class="navbar-content">
       <h2 class="logo">warenbergg</h2>
       <button class="menu-toggle" id="menu-toggle">☰</button>
@@ -26,10 +27,6 @@
     </div>
   </nav>
   
-  <!-- PINDAH KE SINI -->
-  <div class="nav-overlay" id="nav-overlay"></div>
-  
-
   <!-- MAIN CONTENT -->
   <main class="main-content">
     <!-- NAME SECTION -->
@@ -121,11 +118,10 @@
 
   // klik overlay = tutup
   overlay.addEventListener("click", () => {
-  nav.classList.remove("active");
-  overlay.classList.remove("active");
-  toggle.classList.remove("active");
-  document.body.classList.remove("no-scroll");
-});
+    nav.classList.remove("active");
+    overlay.classList.remove("active");
+    toggle.classList.remove("active");
+  });
 
   // klik menu = auto close
   links.forEach(link => {
@@ -133,16 +129,8 @@
       nav.classList.remove("active");
       overlay.classList.remove("active");
       toggle.classList.remove("active");
-    document.body.classList.remove("no-scroll");
+    });
   });
-});
-  toggle.addEventListener("click", () => {
-  nav.classList.toggle("active");
-  overlay.classList.toggle("active");
-  toggle.classList.toggle("active");
-
-  document.body.classList.toggle("no-scroll");
-});
 
 // Dark Mode Toggle
 const darkToggle = document.getElementById('dark-toggle');

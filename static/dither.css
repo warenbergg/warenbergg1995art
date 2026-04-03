@@ -729,7 +729,6 @@ body.dark-mode .info-body p {
   display: none !important;
 }
 
-
 /* Warna input color agar selaras */
 input[type="color"] {
   border: none;
@@ -738,43 +737,6 @@ input[type="color"] {
   cursor: pointer;
   background: none;
 }
-/* ========== HAMBURGER BUTTON ========== */
-.menu-toggle {
-  display: none;
-  font-size: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* ========== MOBILE NAV FIX ========== */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-
-  .nav-main {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: inherit;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 16px 24px;
-    gap: 12px;
-
-    /* hidden by default */
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-
-  .nav-main.active {
-    max-height: 300px;
-  }
-}
-/* ========== PREMIUM MOBILE NAVBAR ========== */
 
 /* tombol hamburger */
 .menu-toggle {
@@ -856,6 +818,16 @@ input[type="color"] {
     width: 100%;
   }
 }
+.nav-main a {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-main a:hover {
+  transform: translateX(6px);
+  opacity: 0.6;
+}
+
+
 
 /* tamabhan button dowload */
 #downloadImgBtn {

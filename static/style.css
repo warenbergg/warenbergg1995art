@@ -115,16 +115,6 @@ body.dark-mode .navbar {
   opacity: 0.7;
 }
 
-@media (max-width: 768px) {
-  .dark-btn {
-    order: 1;
-    margin-left: auto;
-  }
-}
-.dark-btn:hover {
-  opacity: 0.7;
-}
-
 /* ========== MAIN CONTENT ========== */
 .main-content {
   width: 100%;
@@ -257,141 +247,6 @@ body.dark-mode .awards-section p {
   color: #ccc;
 }
 
-/* ========== THEORY PAGE ========== */
-.theory-header h1 {
-  font-size: 56px;
-  font-weight: 700;
-  margin-bottom: 12px;
-}
-
-.theory-header p {
-  font-size: 18px;
-  color: #666;
-  font-weight: 400;
-}
-
-.theory-items {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 60px;
-  margin-top: 80px;
-}
-
-.theory-item {
-  text-align: center;
-}
-
-.theory-item a {
-  text-decoration: none;
-  color: #000;
-  transition: opacity 0.3s ease;
-  display: block;
-}
-
-.theory-item a:hover {
-  opacity: 0.6;
-}
-
-body.dark-mode .theory-item a {
-  color: #fff;
-}
-
-.theory-item h2 {
-  font-size: 32px;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.theory-item p {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 4px;
-}
-
-.theory-item .description {
-  font-size: 14px;
-  color: #888;
-  margin-top: 12px;
-}
-
-body.dark-mode .theory-item p,
-body.dark-mode .theory-item .description {
-  color: #aaa;
-}
-
-/* ========== FOOTER ========== */
-.footbar {
-  width: 100%;
-  padding: 40px 24px;
-  background: #fff;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-  text-align: center;
-}
-
-body.dark-mode .footbar {
-  background: #0a0a0a;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.footer-content {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.copyright {
-  font-size: 12px;
-  color: #999;
-  letter-spacing: 0.5px;
-  font-family: 'Poppins', sans-serif;
-}
-
-body.dark-mode .copyright {
-  color: #666;
-}
-
-/* ========== RESPONSIVE ========== */
-@media (max-width: 1024px) {
-  .navbar-content {
-    gap: 20px;
-  }
-
-  .nav-main {
-    gap: 16px;
-  }
-
-  .main-content {
-    padding: 100px 20px 40px;
-  }
-
-  .name-section h1 {
-    font-size: 48px;
-  }
-
-  .tagline-main {
-    font-size: 24px;
-  }
-
-  .tagline-sub {
-    font-size: 18px;
-  }
-
-  .company-section h2 {
-    font-size: 24px;
-  }
-
-  .company-section p {
-    font-size: 18px;
-  }
-
-  .theory-header h1 {
-    font-size: 40px;
-  }
-
-  .theory-items {
-    grid-template-columns: 1fr;
-  }
-}
-
 @media (max-width: 768px) {
   .navbar-content {
     flex-wrap: wrap;
@@ -435,20 +290,14 @@ body.dark-mode .copyright {
 
   .contact-section h3,
   .achievement-section h3,
-  .awards-section h3,
-  .theory-header h1 {
+  .awards-section h3 {
     font-size: 20px;
   }
 
   .contact-section p,
   .achievement-section p,
-  .awards-section p,
-  .theory-item p {
+  .awards-section p{
     font-size: 14px;
-  }
-
-  .theory-items {
-    gap: 40px;
   }
 }
 
@@ -488,8 +337,6 @@ body.dark-mode .copyright {
     margin-bottom: 40px;
   }
 }
-/* ========== PREMIUM MOBILE NAVBAR ========== */
-
 /* tombol hamburger */
 .menu-toggle {
   display: none;

@@ -667,28 +667,42 @@ function processImage() {
 
   ctx.putImageData(img, 0, 0);
 }
-  const toggle = document.getElementById("menu-toggle");
-  const nav = document.querySelector(".nav-main");
-  const overlay = document.getElementById("nav-overlay");
-  const links = document.querySelectorAll(".nav-main a");
+ // Navbar scroll effect
+ window.addEventListener('scroll', () => {
+  const navbar = document.querySelector('.navbar');
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+const toggle = document.getElementById("menu-toggle");
+const nav = document.querySelector(".nav-main");
+const overlay = document.getElementById("nav-overlay");
+const links = document.querySelectorAll(".nav-main a");
 
-  // buka/tutup menu
-  toggle.addEventListener("click", () => {
-    nav.classList.toggle("active");
-    overlay.classList.toggle("active");
-    toggle.classList.toggle("active");
-  });
+// buka/tutup menu
+toggle.addEventListener("click", () => {
+nav.classList.toggle("active");
+overlay.classList.toggle("active");
+toggle.classList.toggle("active");
+});
 
-  // klik menu = auto close
-  links.forEach(link => {
-    link.addEventListener("click", () => {
-      nav.classList.remove("active");
-      overlay.classList.remove("active");
-      toggle.classList.remove("active");
-    });
-  });
+// klik overlay = tutup
+overlay.addEventListener("click", () => {
+nav.classList.remove("active");
+overlay.classList.remove("active");
+toggle.classList.remove("active");
+});
 
-
+// klik menu = auto close
+links.forEach(link => {
+link.addEventListener("click", () => {
+  nav.classList.remove("active");
+  overlay.classList.remove("active");
+  toggle.classList.remove("active");
+});
+});
 // Cek localStorage saat loading
 if (localStorage.getItem('dark-mode') === 'enabled') {
   document.body.classList.add('dark-mode');
@@ -719,3 +733,4 @@ if (darkToggle) {
     }
   });
 }
+
