@@ -426,4 +426,33 @@ body.dark-mode .awards-section p {
   opacity: 0.6;
 }
 
+/* ========== FOOTER ========== */
+.footbar {
+  width: 100%;
+  padding: 40px 24px;
+  background: #fff;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+body.dark-mode .footbar {
+  background: #0a0a0a;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #999;
+  letter-spacing: 0.5px;
+  font-family: 'Poppins', sans-serif;
+}
+
+body.dark-mode .copyright {
+  color: #666;
+}
 
