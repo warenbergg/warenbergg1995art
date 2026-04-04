@@ -1,4 +1,3 @@
-
 /* ========== RESET & GLOBAL ========== */
 * {
   margin: 0;
@@ -16,15 +15,16 @@ body {
   font-family: 'Playfair Display', serif;
   width: 100%;
   min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* ========== DARK MODE ========== */
-.dark-mode {
+body.dark-mode {
   background: #0a0a0a;
   color: #e9e9e9;
 }
 
-/* Navbar */
+/* ========== NAVBAR ========== */
 .navbar {
   position: sticky;
   top: 0;
@@ -33,26 +33,8 @@ body {
   background: rgba(255, 255, 255, 0.8);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
+  width: 100%;
 }
-
-body.dark-mode .navbar {
-  background: rgba(10, 10, 10, 0.8);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* ===== TAMBAHKAN INI ===== */
-body.dark-mode .navbar a {
-  color: #fff;
-}
-
-body.dark-mode .navbar .logo {
-  color: #fff;
-}
-
-body.dark-mode .dark-btn {
-  color: #fff;
-}
-/* ======================== */
 
 body.dark-mode .navbar {
   background: rgba(10, 10, 10, 0.8);
@@ -66,6 +48,7 @@ body.dark-mode .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
 }
 
 .navbar .logo {
@@ -75,14 +58,21 @@ body.dark-mode .navbar {
   text-transform: lowercase;
   min-width: 80px;
   font-family: 'Poppins', sans-serif;
+  color: #000;
 }
 
+body.dark-mode .navbar .logo {
+  color: #fff;
+}
+
+/* ========== NAV MENU ========== */
 .nav-main {
   display: flex;
   gap: 32px;
   list-style: none;
   flex: 1;
   justify-content: center;
+  align-items: center;
 }
 
 .navbar a {
@@ -96,10 +86,15 @@ body.dark-mode .navbar {
   font-family: 'Poppins', sans-serif;
 }
 
+body.dark-mode .navbar a {
+  color: #fff;
+}
+
 .navbar a:hover {
   opacity: 0.6;
 }
 
+/* ========== DARK MODE BUTTON ========== */
 .dark-btn {
   background: transparent;
   border: none;
@@ -108,11 +103,66 @@ body.dark-mode .navbar {
   padding: 8px 12px;
   transition: transform 0.3s ease, opacity 0.3s ease;
   font-family: 'Poppins', sans-serif;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+body.dark-mode .dark-btn {
+  color: #fff;
 }
 
 .dark-btn:hover {
   transform: scale(1.1);
   opacity: 0.7;
+}
+
+/* ========== HAMBURGER BUTTON ========== */
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1002;
+  transition: transform 0.3s ease;
+  color: #000;
+  padding: 8px 12px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.dark-mode .menu-toggle {
+  color: #fff;
+}
+
+.menu-toggle.active {
+  transform: rotate(90deg);
+}
+
+/* ========== NAV OVERLAY ========== */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 99;
+}
+
+.nav-overlay.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
 /* ========== MAIN CONTENT ========== */
@@ -152,6 +202,10 @@ body.dark-mode .navbar {
   letter-spacing: -0.3px;
 }
 
+body.dark-mode .tagline-sub {
+  color: #aaa;
+}
+
 /* ========== COMPANY SECTION ========== */
 .company-section h2 {
   font-size: 28px;
@@ -163,6 +217,10 @@ body.dark-mode .navbar {
   font-size: 20px;
   font-weight: 400;
   color: #555;
+}
+
+body.dark-mode .company-section p {
+  color: #aaa;
 }
 
 /* ========== CONTACT SECTION ========== */
@@ -179,6 +237,10 @@ body.dark-mode .navbar {
   color: #333;
 }
 
+body.dark-mode .contact-section p {
+  color: #ccc;
+}
+
 .contact-section a {
   color: #000;
   text-decoration: none;
@@ -186,13 +248,13 @@ body.dark-mode .navbar {
   transition: opacity 0.3s ease;
 }
 
-.contact-section a:hover {
-  opacity: 0.6;
-}
-
 body.dark-mode .contact-section a {
   color: #fff;
   border-bottom: 1px solid #fff;
+}
+
+.contact-section a:hover {
+  opacity: 0.6;
 }
 
 /* ========== ACHIEVEMENT SECTIONS ========== */
@@ -209,6 +271,10 @@ body.dark-mode .contact-section a {
   color: #333;
 }
 
+body.dark-mode .achievement-section p {
+  color: #ccc;
+}
+
 .achievement-section a {
   color: #000;
   text-decoration: none;
@@ -216,17 +282,13 @@ body.dark-mode .contact-section a {
   transition: opacity 0.3s ease;
 }
 
-.achievement-section a:hover {
-  opacity: 0.6;
-}
-
-body.dark-mode .achievement-section p {
-  color: #ccc;
-}
-
 body.dark-mode .achievement-section a {
   color: #fff;
   border-bottom: 1px solid #fff;
+}
+
+.achievement-section a:hover {
+  opacity: 0.6;
 }
 
 /* ========== AWARDS SECTION ========== */
@@ -247,20 +309,149 @@ body.dark-mode .awards-section p {
   color: #ccc;
 }
 
-@media (max-width: 768px) {
+/* ========== FOOTER ========== */
+.footbar {
+  width: 100%;
+  padding: 40px 24px;
+  background: #fff;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+body.dark-mode .footbar {
+  background: #0a0a0a;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #999;
+  letter-spacing: 0.5px;
+  font-family: 'Poppins', sans-serif;
+}
+
+body.dark-mode .copyright {
+  color: #666;
+}
+
+/* ========== PREVENT BODY SCROLL WHEN MENU OPEN ========== */
+body.menu-open {
+  overflow: hidden;
+}
+
+/* ========== SMOOTH TRANSITIONS ========== */
+.nav-main a {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* ========== TABLET RESPONSIVE (≤1024px) ========== */
+@media (max-width: 1024px) {
   .navbar-content {
-    flex-wrap: wrap;
     gap: 12px;
   }
 
   .nav-main {
-    flex-basis: 100%;
-    gap: 12px;
-    font-size: 11px;
+    gap: 16px;
   }
 
   .main-content {
-    padding: 80px 16px 30px;
+    padding: 100px 20px 40px;
+  }
+
+  .name-section h1 {
+    font-size: 48px;
+  }
+
+  .tagline-main {
+    font-size: 24px;
+  }
+
+  .tagline-sub {
+    font-size: 18px;
+  }
+
+  .company-section h2 {
+    font-size: 24px;
+  }
+
+  .company-section p {
+    font-size: 18px;
+  }
+}
+
+/* ========== MOBILE RESPONSIVE (≤768px) ========== */
+@media (max-width: 768px) {
+  .navbar-content {
+    padding: 12px 16px;
+  }
+
+  .navbar .logo {
+    font-size: 13px;
+    min-width: auto;
+  }
+
+  .nav-main {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 75%;
+    max-width: 280px;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 24px 24px;
+    gap: 20px;
+    transition: right 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 1001;
+  }
+
+  body.dark-mode .nav-main {
+    background: rgba(10, 10, 10, 0.98);
+  }
+
+  .nav-main.active {
+    right: 0;
+  }
+
+  .nav-main li {
+    width: 100%;
+  }
+
+  .nav-main a {
+    font-size: 14px;
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  body.dark-mode .nav-main a {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-main a:hover {
+    transform: translateX(6px);
+    opacity: 0.6;
+  }
+
+  .menu-toggle {
+    display: flex;
+    margin-left: auto;
+  }
+
+  .dark-btn {
+    margin-left: 0;
+  }
+
+  .main-content {
+    padding: 80px 16px 40px;
     max-width: 100%;
   }
 
@@ -296,29 +487,59 @@ body.dark-mode .awards-section p {
 
   .contact-section p,
   .achievement-section p,
-  .awards-section p{
+  .awards-section p {
     font-size: 14px;
   }
 }
 
+/* ========== MOBILE RESPONSIVE (≤480px) ========== */
 @media (max-width: 480px) {
   .navbar {
-    position: relative;
+    position: sticky;
   }
 
   .navbar-content {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .nav-main {
-    flex-basis: 100%;
-    flex-direction: column;
+    padding: 12px 12px;
     gap: 8px;
   }
 
+  .navbar .logo {
+    font-size: 12px;
+    min-width: auto;
+  }
+
+  .nav-main {
+    width: 80%;
+    max-width: 320px;
+    padding: 70px 16px 24px;
+  }
+
+  .nav-main a {
+    font-size: 13px;
+    padding: 10px 0;
+  }
+
+  .menu-toggle {
+    font-size: 22px;
+    padding: 6px 8px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  .dark-btn {
+    font-size: 16px;
+    padding: 6px 8px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
   .main-content {
-    padding: 60px 12px 20px;
+    padding: 60px 12px 30px;
+    max-width: 100%;
+  }
+
+  .section {
+    margin-bottom: 40px;
   }
 
   .name-section h1 {
@@ -333,126 +554,75 @@ body.dark-mode .awards-section p {
     font-size: 14px;
   }
 
-  .section {
-    margin-bottom: 40px;
+  .company-section h2 {
+    font-size: 20px;
+  }
+
+  .company-section p {
+    font-size: 14px;
+  }
+
+  .contact-section h3,
+  .achievement-section h3,
+  .awards-section h3 {
+    font-size: 18px;
+  }
+
+  .contact-section p,
+  .achievement-section p,
+  .awards-section p {
+    font-size: 13px;
+  }
+
+  .footbar {
+    padding: 30px 12px;
+  }
+
+  .copyright {
+    font-size: 11px;
   }
 }
-/* tombol hamburger */
-.menu-toggle {
-  display: none;
-  font-size: 22px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 1002;
-  transition: transform 0.3s ease;
-}
 
-.menu-toggle.active {
-  transform: rotate(90deg);
-}
+/* ========== EXTRA SMALL MOBILE (≤360px) ========== */
+@media (max-width: 360px) {
+  .navbar-content {
+    padding: 10px 8px;
+  }
 
-/* overlay gelap */
-.nav-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.3);
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.3s ease;
-  z-index: 999;
-}
-
-.nav-overlay.active {
-  opacity: 1;
-  pointer-events: all;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-
-  .menu-toggle {
-    display: block;
-    margin-left: auto;
+  .navbar .logo {
+    font-size: 11px;
   }
 
   .nav-main {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 75%;
-    max-width: 320px;
-    height: 100vh;
-
-    background: rgba(255,255,255,0.98);
-    backdrop-filter: blur(12px);
-
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 100px 24px 24px;
-    gap: 20px;
-
-    transition: right 0.35s cubic-bezier(0.77, 0, 0.175, 1);
-    z-index: 1001;
-  }
-
-  body.dark-mode .nav-main {
-    background: rgba(10,10,10,0.98);
-  }
-
-  .nav-main.active {
-    right: 0;
-  }
-
-  .nav-main li {
-    width: 100%;
+    width: 85%;
+    padding: 60px 12px 16px;
   }
 
   .nav-main a {
+    font-size: 12px;
+  }
+
+  .menu-toggle {
+    font-size: 20px;
+  }
+
+  .dark-btn {
+    font-size: 14px;
+  }
+
+  .main-content {
+    padding: 50px 10px 20px;
+  }
+
+  .name-section h1 {
+    font-size: 24px;
+  }
+
+  .tagline-main {
     font-size: 16px;
-    display: block;
-    width: 100%;
+  }
+
+  .tagline-sub {
+    font-size: 12px;
   }
 }
-.nav-main a {
-  transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-.nav-main a:hover {
-  transform: translateX(6px);
-  opacity: 0.6;
-}
-
-/* ========== FOOTER ========== */
-.footbar {
-  width: 100%;
-  padding: 40px 24px;
-  background: #fff;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-  text-align: center;
-}
-
-body.dark-mode .footbar {
-  background: #0a0a0a;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.footer-content {
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.copyright {
-  font-size: 12px;
-  color: #999;
-  letter-spacing: 0.5px;
-  font-family: 'Poppins', sans-serif;
-}
-
-body.dark-mode .copyright {
-  color: #666;
-}
-
