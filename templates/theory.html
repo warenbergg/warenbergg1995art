@@ -258,35 +258,57 @@
       color: #aaa;
     }
 
-    /* ========== FOOTER ========== */
-    .footbar {
-      width: 100%;
-      padding: 40px 24px;
-      background: #fff;
-      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    /* Footer */
+    .footer {
+      margin-top: 120px;
+      padding: 40px 0;
       text-align: center;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
     }
 
-    body.dark-mode .footbar {
-      background: #0a0a0a;
+    body.dark-mode .footer {
       border-top: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .footer-content {
-      max-width: 1400px;
-      margin: 0 auto;
+    .footer .title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
 
-    .copyright {
+    .footer .subtitle {
+      font-size: 13px;
+      opacity: 0.7;
+      margin-bottom: 16px;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .social-links a {
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      color: inherit;
+      transition: 0.3s ease;
+    }
+
+    .social-links a:hover {
+      border-bottom: 1px solid currentColor;
+      opacity: 0.7;
+    }
+
+    .footer .copyright {
       font-size: 12px;
-      color: #999;
-      letter-spacing: 0.5px;
-      font-family: 'Poppins', sans-serif;
+      opacity: 0.5;
+      margin-top: 10px;
     }
 
-    body.dark-mode .copyright {
-      color: #666;
-    }
 
     /* ========== TABLET RESPONSIVE (768px) ========== */
     @media (max-width: 768px) {
@@ -572,11 +594,17 @@
     </section>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="footbar">
-    <div class="footer-content">
-      <p class="copyright">© 2025 warenbergg1995. All Rights Reserved.</p>
+   <!-- FOOTER -->
+   <footer class="footer">
+    <p class="title">1995</p>
+    <p class="subtitle">Coding • Visual • Art</p>
+    <div class="social-links">
+      <a href="#" target="_blank">Instagram</a>
+      <a href="https://github.com/warenbergg" target="_blank">Github</a>
+      <a href="https://scrapbox.io/WarenBergg1995/" target="_blank">scrapbox.io</a>
+      <a href="https://x.com/warenbergg1995" target="_blank">X</a>
     </div>
+    <p class="copyright">© 2025 WarenBergg1995 All Rights Reserved.</p>
   </footer>
 
   <!-- SCRIPTS -->

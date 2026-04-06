@@ -310,33 +310,55 @@ body.dark-mode .awards-section p {
 }
 
 /* ========== FOOTER ========== */
-.footbar {
-  width: 100%;
-  padding: 40px 24px;
-  background: #fff;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
+/* Footer */
+.footer {
+  margin-top: 120px;
+  padding: 40px 0;
   text-align: center;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-body.dark-mode .footbar {
-  background: #0a0a0a;
+body.dark-mode .footer {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.footer-content {
-  max-width: 1400px;
-  margin: 0 auto;
+.footer .title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
 
-.copyright {
+.footer .subtitle {
+  font-size: 13px;
+  opacity: 0.7;
+  margin-bottom: 16px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.social-links a {
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  color: inherit;
+  transition: 0.3s ease;
+}
+
+.social-links a:hover {
+  border-bottom: 1px solid currentColor;
+  opacity: 0.7;
+}
+
+.footer .copyright {
   font-size: 12px;
-  color: #999;
-  letter-spacing: 0.5px;
-  font-family: 'Poppins', sans-serif;
-}
-
-body.dark-mode .copyright {
-  color: #666;
+  opacity: 0.5;
+  margin-top: 10px;
 }
 
 /* ========== PREVENT BODY SCROLL WHEN MENU OPEN ========== */
